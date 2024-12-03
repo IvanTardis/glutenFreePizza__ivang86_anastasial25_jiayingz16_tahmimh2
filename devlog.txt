@@ -1,6 +1,9 @@
 FORMAT:
 firstL -- TIMESTAMP\n (e.g.: tawabB -- 1969-04-20 12:34)
 
+michelleZ -- 2024-11-26 21:30
+* created and worked on design doc
+
 ivanG -- 2024-12-02 20:54
 * updated design doc to clarify mostly minor details: does a user need to be logged in, how to obtain list of all countries, total hints, site map cleaning, database organization.
 
@@ -12,3 +15,10 @@ anastasiaL -- 2024-12-03 01:23
   * added why bootstrap
   * added clarifications to component map
 * added README heading and roster + roles
+
+michelleZ -- 2024-12-03 22:00 
+* updated design doc & resolved comments within group
+
+michelleZ -- 2024-12-04 10:15
+* completed REAME file, adding launch codes and guidelines for installing dependencies
+
