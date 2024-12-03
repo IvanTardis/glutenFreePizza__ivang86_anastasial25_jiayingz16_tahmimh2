@@ -16,9 +16,9 @@ This project is a country guessing game where users must identify a country base
 
 Ensure that **Git** is installed on your machine. For help, refer to the following documentation: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git 
 
-**Cloning the Project**
+### How to clone/install
 
-3. In terminal, clone the repository to your local machine: 
+In terminal, clone the repository to your local machine: 
 
 HTTPS METHOD (Recommended)
 
@@ -32,18 +32,6 @@ SSH METHOD (Requires SSH Key to be set up):
 $ git clone git@github.com:IvanTardis/glutenFreePizza__ivang86_anastasial25_jiayingz16_tahmimh2.git
 ```
 
-4. Navigate to project directory
-
-```
-$ cd PATH/TO/glutenFreePizza__ivang86_anastasial25_jiayingz16_tahmimh2
-```
-
-5. Install dependencies
-
-```
-$ pip install -r requirements.txt
-```
-        
 # Launch Codes
 
 **Prerequisites**
@@ -82,13 +70,18 @@ $ cd PATH/TO/glutenFreePizza__ivang86_anastasial25_jiayingz16_tahmimh2
 ```
  $ cd app/
 ```
+5. Install dependencies
 
-5. Run App
+```
+$ pip install -r requirements.txt
+```
+
+6. Run App
 
 ```
  $ python3 __init__.py
 ```
-6. Open the link that appears in the terminal to be brought to the website
+7. Open the link that appears in the terminal to be brought to the website
     - You can visit the link via several methods:
         - Control + Clicking on the link
         - Typing/Pasting http://127.0.0.1:5000 in any browser
