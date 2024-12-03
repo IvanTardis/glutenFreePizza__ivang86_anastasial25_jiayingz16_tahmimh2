@@ -3,3 +3,12 @@ firstL -- TIMESTAMP\n (e.g.: tawabB -- 1969-04-20 12:34)
 
 ivanG -- 2024-12-02 20:54
 * updated design doc to clarify mostly minor details: does a user need to be logged in, how to obtain list of all countries, total hints, site map cleaning, database organization.
+
+anastasiaL -- 2024-12-03 01:23
+updated design doc:
+* specified exactly which hints will be provided
+* changed GeoDBCities API to REST Countries API
+* added tables in database section
+* added why bootstrap
+* added clarifications to component map
+* added README heading and roster + roles
