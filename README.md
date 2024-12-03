@@ -17,7 +17,6 @@ This project is a country guessing game where users must identify a country base
 Ensure that **Git** and **Python** are installed on your machine. It is recommended that you use a virtual machine when running this project to avoid any possible conflicts. For help, refer to the following documentation:
    1. Installing Git: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git 
    2. Installing Python: https://www.python.org/downloads/ 
-   3. (Optional) Setting up Git with SSH (Ms. Novillo's APCSA Guide): https://novillo-cs.github.io/apcsa/tools/ 
          
 
 **Cloning the Project**
