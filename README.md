@@ -17,26 +17,7 @@ This project is a country guessing game where users must identify a country base
 Ensure that **Git** is installed on your machine. For help, refer to the following documentation: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
 ### How to clone/install
-1. Create Python virtual environment:
-```
-$ python3 -m venv PATH/TO/venv_name
-```
-
-2. Activate virtual environment
-
-   - Linux: `$ . PATH/TO/venv_name/bin/activate`
-   - Windows (PowerShell): `> . .\PATH\TO\venv_name\Scripts\activate`
-   - Windows (Command Prompt): `>PATH\TO\venv_name\Scripts\activate`
-   - macOS: `$ source PATH/TO/venv_name/bin/activate`
-
-   *Notes*
-
-   - If successful, command line will display name of virtual environment: `(venv_name) $ `
-
-   - Type `$ deactivate` in the terminal to close a virtual environment
-
-
-3. In terminal, clone the repository to your local machine:
+In terminal, clone the repository to your local machine:
 
 HTTPS METHOD:
 
@@ -84,16 +65,16 @@ python3 -m PATH/TO/venv_name
 ```
 cd PATH/TO/glutenFreePizza__ivang86_anastasial25_jiayingz16_tahmimh2
 ```
-
-4. Navigate to 'app' directory
-
-```
- cd app/
-```
-5. Install dependencies
+4. Install dependencies
 
 ```
 pip install -r requirements.txt
+```
+
+5. Navigate to 'app' directory
+
+```
+ cd app/
 ```
 
 6. Run App
