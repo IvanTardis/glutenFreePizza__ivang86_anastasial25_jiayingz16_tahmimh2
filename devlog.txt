@@ -1,0 +1,5 @@
+FORMAT:
+firstL -- TIMESTAMP\n (e.g.: tawabB -- 1969-04-20 12:34)
+
+ivanG -- 2024-12-02 20:54
+* updated design doc to clarify mostly minor details: does a user need to be logged in, how to obtain list of all countries, total hints, site map cleaning, database organization.
