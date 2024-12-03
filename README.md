@@ -38,13 +38,13 @@ $ python3 -m venv PATH/TO/venv_name
 
 3. In terminal, clone the repository to your local machine:
 
-HTTPS METHOD (Recommended)
+HTTPS METHOD:
 
 ```
 git clone https://github.com/IvanTardis/glutenFreePizza__ivang86_anastasial25_jiayingz16_tahmimh2.git      
 ```
 
-SSH METHOD (Requires SSH Key to be set up):
+SSH METHOD (requires the SSH key):
 
 ```
 git clone git@github.com:IvanTardis/glutenFreePizza__ivang86_anastasial25_jiayingz16_tahmimh2.git
