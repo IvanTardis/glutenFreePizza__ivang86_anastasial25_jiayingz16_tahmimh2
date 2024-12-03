@@ -50,7 +50,7 @@ python3 -m PATH/TO/venv_name
 2. Activate virtual environment
 
    - Linux: `. PATH/TO/venv_name/bin/activate`
-   - Windows (PowerShell): `> . .\PATH\TO\venv_name\Scripts\activate`
+   - Windows (PowerShell): `. .\PATH\TO\venv_name\Scripts\activate`
    - Windows (Command Prompt): `>PATH\TO\venv_name\Scripts\activate`
    - macOS: `source PATH/TO/venv_name/bin/activate`
 
