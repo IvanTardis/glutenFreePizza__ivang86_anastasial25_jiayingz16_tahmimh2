@@ -23,3 +23,4 @@ michelleZ -- 2024-12-04 10:15
 * completed REAME file, adding launch codes and guidelines for installing dependencies
 * created and edited readme.md file in keys dir
 * generated API keys and put them in place in keys dir
+* updated requirements.txt
