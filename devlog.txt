@@ -1,11 +1,14 @@
 FORMAT:
 firstL -- TIMESTAMP\n (e.g.: tawabB -- 1969-04-20 12:34)
 
-michelleZ -- 2024-11-26 21:30
+michelleZ, anastasiaL, ivanG, tahmimH -- 2024-11-26 21:30
 * created and worked on design doc
 
 ivanG -- 2024-12-02 20:54
 * updated design doc to clarify mostly minor details: does a user need to be logged in, how to obtain list of all countries, total hints, site map cleaning, database organization.
+
+michelleZ -- 2024-12-02 22:00 
+* updated design doc & resolved comments within group
 
 anastasiaL -- 2024-12-03 01:23
 * updated design doc:
@@ -16,11 +19,17 @@ anastasiaL -- 2024-12-03 01:23
   * added clarifications to component map
 * added README heading and roster + roles
 
-michelleZ -- 2024-12-03 22:00 
-* updated design doc & resolved comments within group
-
-michelleZ -- 2024-12-04 10:15
-* completed REAME file, adding launch codes and guidelines for installing dependencies
+michelleZ -- 2024-12-03 10:15
+* completed README file, adding launch codes and guidelines for installing dependencies
 * created and edited readme.md file in keys dir
 * generated API keys and put them in place in keys dir
 * updated requirements.txt
+
+tahmimH -- 2024-12-03 10:50
+* added FlagsAPI card to knowledge base
+
+anastasiaL -- 2024-12-03 11:00
+* fixed mistakes in README
+
+ivanG -- 2024-12-03 23:00
+* added key for weather API
