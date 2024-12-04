@@ -33,3 +33,7 @@ anastasiaL -- 2024-12-03 11:00
 
 ivanG -- 2024-12-03 23:00
 * added key for weather API
+
+anastasiaL -- 2024-12-04 10:23
+* added RESTCountries API card to knowledge base
+* updated README and design doc with updated roles
