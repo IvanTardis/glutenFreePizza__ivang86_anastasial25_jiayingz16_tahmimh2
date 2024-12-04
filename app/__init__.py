@@ -22,9 +22,15 @@ app.secret_key = os.urandom(32)
 db = sqlite3.connect(DB_FILE, check_same_thread=False) #open if file exists, otherwise create
 c = db.cursor()  #facilitate db ops -- you will use cursor to trigger db events
 
+restCountriesLink = "https://restcountries.com/v3.1/independent?status=true"
+restCountriesURL = urllib.request.urlopen(restCountriesLink)
+reader = restCountriesURL.read()
+countryDict = json.loads(reader)
+pprint.pp(countryDict)
+
 @app.route(("/"), methods=['GET', 'POST'])
 def home():
-
+    return 0
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
