@@ -1,9 +1,9 @@
 # Country guesser by GlutenFreePizza
 
 ## Roster
-- Anastasia - Frontend development (HTML, CSS, Bootstrap)
+- Michelle - Frontend development (HTML, CSS, Bootstrap)
 - Ivan - PM, Backend development (Flask, API calls)
-- Michelle - Database setup (SQLite)
+- Anastasia - Database development (SQLite, Python)
 - Tahmim - Integration (Connect frontent with backend)
 
 ## Site Description
