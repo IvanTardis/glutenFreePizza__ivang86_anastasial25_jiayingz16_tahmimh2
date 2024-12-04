@@ -31,7 +31,7 @@ SSH METHOD (requires the SSH key):
 git clone git@github.com:IvanTardis/glutenFreePizza__ivang86_anastasial25_jiayingz16_tahmimh2.git
 ```
 
-# Launch Codes
+## Launch Codes
 
 **Prerequisites**
 
