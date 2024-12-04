@@ -4,9 +4,7 @@
 1. Request an API key 
 
 ## REST Countries API
-1. 
-1. 
+1. No key needed
 
 ## FlagsAPI
-1. 
-1.
+1. No key needed
