@@ -7,7 +7,7 @@ michelleZ, anastasiaL, ivanG, tahmimH -- 2024-11-26 21:30
 ivanG -- 2024-12-02 20:54
 * updated design doc to clarify mostly minor details: does a user need to be logged in, how to obtain list of all countries, total hints, site map cleaning, database organization.
 
-michelleZ -- 2024-12-02 22:00 
+michelleZ -- 2024-12-02 22:00
 * updated design doc & resolved comments within group
 
 anastasiaL -- 2024-12-03 01:23
@@ -41,3 +41,6 @@ anastasiaL -- 2024-12-04 10:23
 anastasiaL -- 2024-12-04 21:37
 * finished user database methods (user_db.py)
 * wrote auth_login and auth_reg methods (__init__.py)
+
+ivanG -- 2024-12-05 10:55
+* loaded in a list of all independent countries from RESTCountries API into a dictionary with int indexes
