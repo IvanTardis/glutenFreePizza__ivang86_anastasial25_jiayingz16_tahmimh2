@@ -24,6 +24,7 @@ michelleZ -- 2024-12-03 10:15
 * created and edited readme.md file in keys dir
 * generated API keys and put them in place in keys dir
 * updated requirements.txt
+* started editing login.html
 
 tahmimH -- 2024-12-03 10:50
 * added FlagsAPI card to knowledge base
@@ -44,3 +45,10 @@ anastasiaL -- 2024-12-04 21:37
 
 tahmimH -- 2024-12-04 10:30
 *added base code for prompting and getting login and REGISTRATIONS
+
+ivanG -- 2024-12-05 10:55
+* loaded in a list of all independent countries from RESTCountries API into a dictionary with int indexes
+
+michelleZ -- 2024-12-04
+* addressed api access/filter issue
+* worked with team to get app working
