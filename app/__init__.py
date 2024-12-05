@@ -18,11 +18,19 @@ app.secret_key = os.urandom(32)
 
 createUsers()
 
-restCountriesLink = "https://restcountries.com/v3.1/independent?status=true"
+restCountriesLink = "https://restcountries.com/v3.1/independent?fields=name"
 restCountriesURL = urllib.request.urlopen(restCountriesLink)
 reader = restCountriesURL.read()
 countryDict = json.loads(reader)
-pprint.pp(countryDict)
+
+cleanerDict = {}
+i = 0
+for country in countryDict:
+    # print(country)
+    cleanerDict[i] = country['name']['common']
+    i+=1
+
+# pprint.pp(cleanerDict)
 
 @app.route(("/"), methods=['GET', 'POST'])
 def home():
