@@ -37,3 +37,7 @@ ivanG -- 2024-12-03 23:00
 anastasiaL -- 2024-12-04 10:23
 * added RESTCountries API card to knowledge base
 * updated README and design doc with updated roles
+
+anastasiaL -- 2024-12-04 21:37
+* finished user database methods (user_db.py)
+* wrote auth_login and auth_reg methods (__init__.py)

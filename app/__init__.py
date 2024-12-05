@@ -1,26 +1,22 @@
-'''
-Gluten Free Pizza - Tawab Berri, Ivan Gontchar, Nia Lam, Alex Luo
-SoftDev
-2024-12-04
-p01 - ArRESTed Development - Globle
-time spent:
-'''
-from flask import Flask, render_template, request, session, redirect, url_for
+# GlutenFreePizza: Anastasia, Ivan, Michelle, Tahmim
+# P1: ArRESTed Development
+# SoftDev
+# Dec 2024
+
+from flask import Flask, render_template, request, session, redirect, flash, url_for
 
 import urllib.request
 import pprint
 import json
-import sqlite3
 import os
+from user_db import *
 
 app = Flask(__name__)    #create Flask object
-DB_FILE = "database.db" #create a database for private keys storage
 
 # makin' a supa-secret key
 app.secret_key = os.urandom(32)
 
-db = sqlite3.connect(DB_FILE, check_same_thread=False) #open if file exists, otherwise create
-c = db.cursor()  #facilitate db ops -- you will use cursor to trigger db events
+createUsers()
 
 restCountriesLink = "https://restcountries.com/v3.1/independent?status=true"
 restCountriesURL = urllib.request.urlopen(restCountriesLink)
@@ -30,13 +26,9 @@ pprint.pp(countryDict)
 
 @app.route(("/"), methods=['GET', 'POST'])
 def home():
-<<<<<<< HEAD
-    return 0
-=======
     if 'username' in session:
         return render_template("home.html", user = session['username'])
-    else:
-        return redirect("/login")
+    return redirect("/login")
 
 
 # USER LOGIN
@@ -49,14 +41,17 @@ def auth_login():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
-        app.secret_key = os.urandom(32)
-        if dbx.verify_user(username, password):
-            session['username'] = username
-            session['name'] = username
-            return redirect('/')
-        else:
-            flash("Incorrect username or password.", 'error')
-            return redirect("/login")
+        if not (username and password):
+            flash("One or more fields empty", 'error')
+            return redirect('/login')
+        message = checkLogin(username, password)
+        if message:
+            flash(message, 'error')
+            return redirect('/login')
+        session['username'] = username
+        session['name'] = username
+        return redirect('/')
+    return redirect('/login')
 
 
 # USER REGISTRATIONS
@@ -67,19 +62,19 @@ def register():
 @app.route('/auth_reg', methods=["GET", "POST"])
 def auth_reg():
     if request.method == "POST":
-        new_username = request.form['new_user']
-        new_password = request.form['new_pass']
-        elif new_password != request.form['confirm_pass']:
-            flash("Passwords do not match.", 'error')
-            return render_template("register.html")
-        else:
-            try:
-                dbx.create_user(new_username, new_password)
-                flash("You are now registered! Please log in.", 'success')
-                return render_template("login.html")
-            except sqlite3.IntegrityError:
-                flash("Username already exists.", 'error')
-                return render_template("register.html")
+        username = request.form['username']
+        password = request.form['password']
+        if not (username and password):
+            flash("One or more fields empty", 'error')
+            return redirect('/register')
+        message = addUser(username, password)
+        if message:
+            flash(message, 'error')
+            return redirect('/register')
+        session['username'] = username
+        session['password'] = password
+        return redirect('/')
+    return redirect('/register')
 
 
 # USER LOGOUTS
@@ -89,14 +84,7 @@ def logout():
     session.pop('name', None)
     return redirect("/")
 
->>>>>>> fbb413837dca7690d67307ee977fd9f2512fd508
-
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
     app.debug = True
     app.run()
-
-# session.pop('username', None)
-
-# close it up
-db.close()
