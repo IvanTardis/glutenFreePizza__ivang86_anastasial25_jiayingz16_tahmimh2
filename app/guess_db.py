@@ -23,13 +23,22 @@ def addUserG(username):
         return
     return "Username taken"
 
-'''
 def newGame(username, c_curr):
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
-    c.execute("UPDATE guesses SET g_total = ? WHERE username = ?", (, username))
+    c.execute("SELECT g_total FROM users WHERE username = ?", (username,))
+    old_g_total = c.fetchone()[0]
+    c.execute("UPDATE guesses SET g_total = ? WHERE username = ?", (old_g_total+1, username))
+    c.execute("SELECT c_num FROM users WHERE username = ?", (username,))
+    old_c_num = c.fetchone()[0]
+    c.execute("UPDATE guesses SET c_num = ? WHERE username = ?", (old_c_num+1, username))
+    c.execute("UPDATE guesses SET hint_num = ? WHERE username = ?", (1, username))
     c.execute("UPDATE guesses SET c_curr = ? WHERE username = ?", (c_curr, username))
+    guesses.commit()
 
+'''
+finishGame(username)
+    update g_avg
 newHint(username)
 hint_num++
 '''
