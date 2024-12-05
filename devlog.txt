@@ -54,4 +54,4 @@ michelleZ -- 2024-12-05 11:00
 * worked with team to get app working
 
 anastasiaL -- 2024-12-05 11:01
-* created guesses database (guesses_db.py) and worked on methods
+* created guesses database (guess_db.py) and worked on methods (createGuesses, addUserG, deleteGuesses, newGame)
