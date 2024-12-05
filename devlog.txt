@@ -24,6 +24,7 @@ michelleZ -- 2024-12-03 10:15
 * created and edited readme.md file in keys dir
 * generated API keys and put them in place in keys dir
 * updated requirements.txt
+* started editing login.html
 
 tahmimH -- 2024-12-03 10:50
 * added FlagsAPI card to knowledge base
@@ -41,3 +42,7 @@ anastasiaL -- 2024-12-04 10:23
 anastasiaL -- 2024-12-04 21:37
 * finished user database methods (user_db.py)
 * wrote auth_login and auth_reg methods (__init__.py)
+
+michelleZ -- 2024-12-04 
+* addressed api access/filter issue
+* worked with team to get app working
