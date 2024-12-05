@@ -43,6 +43,9 @@ anastasiaL -- 2024-12-04 21:37
 * finished user database methods (user_db.py)
 * wrote auth_login and auth_reg methods (__init__.py)
 
+tahmimH -- 2024-12-04 10:30
+*added base code for prompting and getting login and REGISTRATIONS
+
 ivanG -- 2024-12-05 10:55
 * loaded in a list of all independent countries from RESTCountries API into a dictionary with int indexes
 
