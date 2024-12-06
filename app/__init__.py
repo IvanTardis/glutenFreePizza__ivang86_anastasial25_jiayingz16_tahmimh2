@@ -10,6 +10,7 @@ import pprint
 import json
 import os
 import random
+from countries import *
 from user_db import *
 
 app = Flask(__name__)    #create Flask object
@@ -20,7 +21,9 @@ app.secret_key = os.urandom(32)
 createUsers()
 
 # GETTING A RANDOM FLAG URL
-
+# x = randomCountry()
+# print(x)
+# getCountryInfo(x)
 
 # restFlagsLink = f"https://flagsapi.com/{code}/flat/64.png"
 # print(restFlagsLink)

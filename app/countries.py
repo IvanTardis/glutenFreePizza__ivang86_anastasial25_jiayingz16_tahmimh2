@@ -35,3 +35,30 @@ def randomCountry():
     return code
 
 def getCountryInfo(x):
+    a = f"https://restcountries.com/v3.1/alpha/{x}"
+    b = urllib.request.urlopen(a)
+    c = b.read()
+    d = json.loads(c)
+
+    lst = []
+    i=0
+    for l in d[0]['languages']:
+        for x in l:
+            lst.append(x)
+        # print("HELLO " + lst + "\n")
+        i+=1
+
+    info = {
+        'name': d[0]['name']['common'],
+        'unMember': d[0]['unMember'],
+        'currency': (d[0]['currencies']['TMT']['name'], d['currencies']['symbol']),
+        'capital': d[0]['capital'],
+        'region': d[0]['region'],
+        'subregion': d[0]['subregion'],
+        'languages': d[0]['languages']
+    }
+    pprint.pp(info)
+
+
+x = randomCountry()
+getCountryInfo(x)
