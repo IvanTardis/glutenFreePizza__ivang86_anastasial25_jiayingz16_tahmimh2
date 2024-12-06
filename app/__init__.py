@@ -9,6 +9,7 @@ import urllib.request
 import pprint
 import json
 import os
+import random
 from user_db import *
 
 app = Flask(__name__)    #create Flask object
@@ -18,19 +19,44 @@ app.secret_key = os.urandom(32)
 
 createUsers()
 
-restCountriesLink = "https://restcountries.com/v3.1/independent?fields=name"
+# GETTING RESTCOUNTRIES INFO
+restCountriesLink = "https://restcountries.com/v3.1/independent?fields=name,cca2"
 restCountriesURL = urllib.request.urlopen(restCountriesLink)
-reader = restCountriesURL.read()
-countryDict = json.loads(reader)
+readCountries = restCountriesURL.read()
+countryDict = json.loads(readCountries)
 
 cleanerDict = {}
 i = 0
 for country in countryDict:
     # print(country)
-    cleanerDict[i] = country['name']['common']
+    cleanerDict[i] = country['name']['common'], country['cca2']
     i+=1
-
 # pprint.pp(cleanerDict)
+
+# GETTING A RANDOM FLAG URL
+x = random.randint(0,193)
+code = cleanerDict[x][1]
+restFlagsLink = f"https://flagsapi.com/{code}/flat/64.png"
+print(restFlagsLink)
+
+# GETTING SOME WEATHER DATA ON IT
+# a = f"https://restcountries.com/v3.1/alpha/{code}"
+# b = urllib.request.urlopen(a)
+# c = b.read()
+# d = json.loads(c)
+# # pprint.pp(d)
+#
+# lat = d['capitalInfo']['latlng'][0]
+# lon = d['capitalInfo']['latlng'][1]
+# file = open("key_openWeatherMap.txt")
+# weatherKey = file.readline()
+# restWeatherLink = f"https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lon}&appid={weatherKey}"
+# restWeatherURL = urllib.request.urlopen(restWeatherLink)
+# readWeather = restWeatherURL.read()
+# weatherDict = json.loads(readWeather)
+# pprint.pp(weatherDict)
+
+
 
 @app.route(("/"), methods=['GET', 'POST'])
 def home():
