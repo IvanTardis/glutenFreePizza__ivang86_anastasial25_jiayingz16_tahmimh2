@@ -19,25 +19,11 @@ app.secret_key = os.urandom(32)
 
 createUsers()
 
-# GETTING RESTCOUNTRIES INFO
-restCountriesLink = "https://restcountries.com/v3.1/independent?fields=name,cca2"
-restCountriesURL = urllib.request.urlopen(restCountriesLink)
-readCountries = restCountriesURL.read()
-countryDict = json.loads(readCountries)
-
-cleanerDict = {}
-i = 0
-for country in countryDict:
-    # print(country)
-    cleanerDict[i] = country['name']['common'], country['cca2']
-    i+=1
-# pprint.pp(cleanerDict)
-
 # GETTING A RANDOM FLAG URL
-x = random.randint(0,193)
-code = cleanerDict[x][1]
-restFlagsLink = f"https://flagsapi.com/{code}/flat/64.png"
-print(restFlagsLink)
+
+
+# restFlagsLink = f"https://flagsapi.com/{code}/flat/64.png"
+# print(restFlagsLink)
 
 # GETTING SOME WEATHER DATA ON IT
 # a = f"https://restcountries.com/v3.1/alpha/{code}"
