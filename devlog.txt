@@ -58,3 +58,6 @@ anastasiaL -- 2024-12-05 11:01
 
 ivanG -- 2024-12-05 23:00
 * added some code to try and fetch API data, works pretty well
+
+anastasiaL -- 2024-12-06 11:00
+* wrote new methods in guess_db.py
