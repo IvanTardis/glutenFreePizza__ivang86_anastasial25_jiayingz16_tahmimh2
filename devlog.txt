@@ -55,3 +55,6 @@ michelleZ -- 2024-12-05 11:00
 
 anastasiaL -- 2024-12-05 11:01
 * created guesses database (guess_db.py) and worked on methods (createGuesses, addUserG, deleteGuesses, newGame)
+
+ivanG -- 2024-12-05 23:00
+* added some code to try and fetch API data, works pretty well
