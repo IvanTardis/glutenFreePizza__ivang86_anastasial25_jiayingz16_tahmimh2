@@ -26,22 +26,39 @@ def addUserG(username):
 def newGame(username, c_curr):
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
-    c.execute("SELECT g_total FROM users WHERE username = ?", (username,))
-    old_g_total = c.fetchone()[0]
-    c.execute("UPDATE guesses SET g_total = ? WHERE username = ?", (old_g_total+1, username))
+    # c_num++
     c.execute("SELECT c_num FROM users WHERE username = ?", (username,))
     old_c_num = c.fetchone()[0]
     c.execute("UPDATE guesses SET c_num = ? WHERE username = ?", (old_c_num+1, username))
+    # hint_num = 1
     c.execute("UPDATE guesses SET hint_num = ? WHERE username = ?", (1, username))
+    # c_curr = new current country
     c.execute("UPDATE guesses SET c_curr = ? WHERE username = ?", (c_curr, username))
     guesses.commit()
 
-'''
-finishGame(username)
-    update g_avg
-newHint(username)
-hint_num++
-'''
+def finishGame(username):
+    newHint(username)
+    # update g_avg
+    c.execute("SELECT g_total FROM users WHERE username = ?", (username,))
+    g_total = c.fetchone()[0]
+    c.execute("SELECT c_num FROM users WHERE username = ?", (username,))
+    c_num = c.fetchone()[0]
+    new_g_avg = g_total/c_num
+    c.execute("UPDATE guesses SET g_avg = ? WHERE username = ?", (new_g_avg, username))
+    guesses.commit()
+
+def newHint(username):
+    guesses = sqlite3.connect(GUESS_FILE)
+    c = guesses.cursor()
+    # g_total++
+    c.execute("SELECT g_total FROM users WHERE username = ?", (username,))
+    old_g_total = c.fetchone()[0]
+    c.execute("UPDATE guesses SET g_total = ? WHERE username = ?", (old_g_total+1, username))
+    # hint_num++
+    c.execute("SELECT hint_num FROM users WHERE username = ?", (username,))
+    old_hint_num = c.fetchone()[0]
+    c.execute("UPDATE guesses SET hint_num = ? WHERE username = ?", (old_hint_num+1, username))
+    guesses.commit()
 
 def deleteGuesses():
     guesses = sqlite3.connect(GUESS_FILE) 
