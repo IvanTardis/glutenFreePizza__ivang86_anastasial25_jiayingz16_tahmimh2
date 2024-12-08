@@ -69,3 +69,5 @@ michelleZ -- 2024-12-08 3:30
 * finished description.html
 * worked on game.html
 * worked on leadership.html
+* added user profile feature on __init__.py
+* attempted fixing login/registration

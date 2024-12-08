@@ -6,12 +6,13 @@
 from flask import Flask, render_template, request, session, redirect, flash, url_for
 
 import urllib.request
-import pprint
 import json
 import os
 import random
-from countries import *
-from user_db import *
+import sqlite3
+from user_db import createUsers, addUser, checkLogin, deleteUsers
+#from countries import *
+#from user_db import *
 
 app = Flask(__name__)    #create Flask object
 
@@ -45,14 +46,9 @@ createUsers()
 # weatherDict = json.loads(readWeather)
 # pprint.pp(weatherDict)
 
-
-
-@app.route(("/"), methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def home():
-    if 'username' in session:
-        return render_template("home.html", user = session['username'])
     return redirect("/login")
-
 
 # USER LOGIN
 @app.route('/login', methods=['GET','POST'])
@@ -64,18 +60,19 @@ def auth_login():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
+        
         if not (username and password):
             flash("One or more fields empty", 'danger')
             return redirect('/login')
+        
         message = checkLogin(username, password)
         if message:
             flash(message, 'danger')
             return redirect('/login')
+        
         session['username'] = username
-        session['name'] = username
-        return redirect('/')
-    return redirect('/login')
-
+        flash("Login successful", "success")
+    return redirect('/home')
 
 # USER REGISTRATIONS
 @app.route('/register', methods=['GET', 'POST'])
@@ -87,25 +84,32 @@ def auth_reg():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
+        
         if not (username and password):
             flash("One or more fields empty", 'danger')
             return redirect('/register')
+        
         message = addUser(username, password)
         if message:
-            flash(message, 'danger')
-            return redirect('/register')
-        session['username'] = username
-        session['password'] = password
-        return redirect('/')
-    return redirect('/register')
-
+            flash(message, "danger")
+            return redirect("/register")
+        
+        flash("Registration successful!")
+    return redirect('/login')
 
 # USER LOGOUTS
 @app.route('/logout', methods=["GET", "POST"])
 def logout():
     session.pop('username', None)
-    session.pop('name', None)
-    return redirect("/")
+    #session.pop('name', None)
+    flash("You have been logged out.", "info")
+    return redirect("/login")
+
+'''
+@app.route('/profile', methods=["GET"])
+def profile():
+    return render_template('profile.html', username='username')
+'''
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
