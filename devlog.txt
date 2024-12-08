@@ -67,3 +67,5 @@ michelleZ -- 2024-12-08 3:30
 * finished register.html
 * finished home.html
 * finished description.html
+* worked on game.html
+* worked on leadership.html
