@@ -65,11 +65,11 @@ def auth_login():
         username = request.form['username']
         password = request.form['password']
         if not (username and password):
-            flash("One or more fields empty", 'error')
+            flash("One or more fields empty", 'danger')
             return redirect('/login')
         message = checkLogin(username, password)
         if message:
-            flash(message, 'error')
+            flash(message, 'danger')
             return redirect('/login')
         session['username'] = username
         session['name'] = username
@@ -88,11 +88,11 @@ def auth_reg():
         username = request.form['username']
         password = request.form['password']
         if not (username and password):
-            flash("One or more fields empty", 'error')
+            flash("One or more fields empty", 'danger')
             return redirect('/register')
         message = addUser(username, password)
         if message:
-            flash(message, 'error')
+            flash(message, 'danger')
             return redirect('/register')
         session['username'] = username
         session['password'] = password
