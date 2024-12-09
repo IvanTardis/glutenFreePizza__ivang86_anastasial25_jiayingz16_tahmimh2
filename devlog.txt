@@ -81,3 +81,4 @@ anastasiaL -- 2024-12-09 09:54
 * fixed links in nav bar on all html pages
 * added nav bar on login.html and register.html
 * added app routes for description, game, and leaderboard pages
+* fixed flashes in __init__.py

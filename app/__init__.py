@@ -94,14 +94,15 @@ def auth_reg():
             flash(message, "danger")
             return redirect("/register")
         
-        flash("Registration successful!")
+        flash("Registration successful!", 'success')
+        return redirect('/login')
     return redirect('/login')
 
 # USER LOGOUTS
 @app.route('/logout', methods=["GET", "POST"])
 def logout():
     session.pop('username', None)
-    #session.pop('name', None)
+    session.pop('password', None)
     flash("You have been logged out.", "info")
     return redirect("/login")
 
