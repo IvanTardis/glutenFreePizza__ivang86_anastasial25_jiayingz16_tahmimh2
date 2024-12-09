@@ -35,29 +35,40 @@ def randomCountry():
     return code
 
 def getCountryInfo(x):
+
     a = f"https://restcountries.com/v3.1/alpha/{x}"
+    
+    # There was an issue with Python crashing because of the symbol of the currency breaking it, i suspect this is not unique to Turkey, so maybe we will get to that
+    # a = f"https://restcountries.com/v3.1/alpha/TR"
+
+    # print(a)
     b = urllib.request.urlopen(a)
     c = b.read()
     d = json.loads(c)
 
-    lst = []
-    i=0
+    langLst = []
     for l in d[0]['languages']:
-        for x in l:
-            lst.append(x)
+        # for x in d[0]['languages'][l]:
+        langLst.append(d[0]['languages'][l])
         # print("HELLO " + lst + "\n")
-        i+=1
+    # print(langLst)
+
+    currencyLst = []
+    for i in d[0]['currencies']:
+        # for x in d[0]['currencies'][i]:
+        currencyLst.append(d[0]['currencies'][i]['name'])
+    # print(currencyLst)
 
     info = {
         'name': d[0]['name']['common'],
         'unMember': d[0]['unMember'],
-        'currency': (d[0]['currencies']['TMT']['name'], d['currencies']['symbol']),
+        'currency': currencyLst,
         'capital': d[0]['capital'],
         'region': d[0]['region'],
         'subregion': d[0]['subregion'],
-        'languages': d[0]['languages']
+        'languages': langLst
     }
-    pprint.pp(info)
+    # pprint.pp(info)
 
 
 x = randomCountry()
