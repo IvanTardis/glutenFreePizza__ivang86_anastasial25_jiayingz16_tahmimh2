@@ -68,10 +68,16 @@ michelleZ -- 2024-12-08 3:30
 * finished home.html
 * finished description.html
 * worked on game.html
-* worked on leadership.html
+* worked on leaderboard.html
 * added user profile feature on __init__.py
 * attempted fixing login/registration
 
 ivanG -- 2024-12-08 23:57
 * fixed country info getting code
 * noted an issue with prior code info-getting
+
+anastasiaL -- 2024-12-09 09:54
+* fixed redirects for login and register
+* fixed links in nav bar on all html pages
+* added nav bar on login.html and register.html
+* added app routes for description, game, and leaderboard pages

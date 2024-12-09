@@ -10,9 +10,8 @@ import json
 import os
 import random
 import sqlite3
-from user_db import createUsers, addUser, checkLogin, deleteUsers
 #from countries import *
-#from user_db import *
+from user_db import *
 
 app = Flask(__name__)    #create Flask object
 
@@ -110,13 +109,19 @@ def logout():
 def description():
     return render_template('description.html')
 
+@app.route('/game', methods=["GET"])
+def game():
+    return render_template('game.html')
+
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():
     return render_template('leaderboard.html')
 
 @app.route('/profile', methods=["GET"])
 def profile():
-    return render_template('profile.html', username='username')
+    if 'username' in session:
+        return render_template('profile.html', username = session['username'])
+    return render_template('profile.html', username = "login to see profile") #temporary
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

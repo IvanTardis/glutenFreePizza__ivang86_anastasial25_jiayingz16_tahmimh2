@@ -37,6 +37,8 @@ def newGame(username, c_curr):
     guesses.commit()
 
 def finishGame(username):
+    guesses = sqlite3.connect(GUESS_FILE)
+    c = guesses.cursor()
     newHint(username)
     # update g_avg
     c.execute("SELECT g_total FROM users WHERE username = ?", (username,))
