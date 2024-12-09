@@ -37,11 +37,11 @@ def randomCountry():
 def getCountryInfo(x):
 
     a = f"https://restcountries.com/v3.1/alpha/{x}"
-    
+
     # There was an issue with Python crashing because of the symbol of the currency breaking it, i suspect this is not unique to Turkey, so maybe we will get to that
     # a = f"https://restcountries.com/v3.1/alpha/TR"
 
-    # print(a)
+    print(a)
     b = urllib.request.urlopen(a)
     c = b.read()
     d = json.loads(c)
@@ -59,17 +59,37 @@ def getCountryInfo(x):
         currencyLst.append(d[0]['currencies'][i]['name'])
     # print(currencyLst)
 
+    coords = []
+    for i in d[0]['capitalInfo']['latlng']:
+        # print(i)
+        # coords.append(d[0]['latlng'][i])
+        coords.append(i)
+
+    bordering = []
+    if 'borders' in d[0]:
+        for i in d[0]['borders']:
+            # print(i)
+            bordering.append(i)
+
     info = {
-        'name': d[0]['name']['common'],
+        'name': [d[0]['name']['common'], x],
         'unMember': d[0]['unMember'],
         'currency': currencyLst,
         'capital': d[0]['capital'],
         'region': d[0]['region'],
         'subregion': d[0]['subregion'],
-        'languages': langLst
+        'languages': langLst,
+        'LatLong': coords,
+        'landlocked': d[0]['landlocked'],
+        'borderingCountries': bordering,
+        'area': d[0]['area'],
+        'population': d[0]['population'],
+        'continents': d[0]['continents']
     }
-    # pprint.pp(info)
+    pprint.pp(info)
 
+def getWeather(lat, long):
+    return 0
 
 x = randomCountry()
 getCountryInfo(x)
