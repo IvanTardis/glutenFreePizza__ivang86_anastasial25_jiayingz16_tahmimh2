@@ -48,7 +48,7 @@ createUsers()
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return redirect("/login")
+    return render_template("home.html")
 
 # USER LOGIN
 @app.route('/login', methods=['GET','POST'])
@@ -72,7 +72,8 @@ def auth_login():
         
         session['username'] = username
         flash("Login successful", "success")
-    return redirect('/home')
+        return redirect('/')
+    return redirect('/')
 
 # USER REGISTRATIONS
 @app.route('/register', methods=['GET', 'POST'])
@@ -105,11 +106,17 @@ def logout():
     flash("You have been logged out.", "info")
     return redirect("/login")
 
-'''
+@app.route('/description', methods=["GET"])
+def description():
+    return render_template('description.html')
+
+@app.route('/leaderboard', methods=["GET"])
+def leaderboard():
+    return render_template('leaderboard.html')
+
 @app.route('/profile', methods=["GET"])
 def profile():
     return render_template('profile.html', username='username')
-'''
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
