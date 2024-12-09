@@ -47,7 +47,10 @@ createUsers()
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template("home.html")
+    if 'username' in session:
+        return render_template("home.html")
+    else:
+        return redirect("/login")
 
 # USER LOGIN
 @app.route('/login', methods=['GET','POST'])
@@ -59,16 +62,16 @@ def auth_login():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
-        
+
         if not (username and password):
             flash("One or more fields empty", 'danger')
             return redirect('/login')
-        
+
         message = checkLogin(username, password)
         if message:
             flash(message, 'danger')
             return redirect('/login')
-        
+
         session['username'] = username
         flash("Login successful", "success")
         return redirect('/')
@@ -84,16 +87,16 @@ def auth_reg():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
-        
+
         if not (username and password):
             flash("One or more fields empty", 'danger')
             return redirect('/register')
-        
+
         message = addUser(username, password)
         if message:
             flash(message, "danger")
             return redirect("/register")
-        
+
         flash("Registration successful!", 'success')
         return redirect('/login')
     return redirect('/login')
