@@ -12,6 +12,7 @@ import random
 import sqlite3
 #from countries import *
 from user_db import *
+from countries.py import *
 
 app = Flask(__name__)    #create Flask object
 
@@ -126,6 +127,11 @@ def profile():
     if 'username' in session:
         return render_template('profile.html', username = session['username'])
     return render_template('profile.html', username = "login to see profile") #temporary
+
+
+def getNewCountry(username):
+    country = randomCountry(0)
+    getCountryInfo(country)
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

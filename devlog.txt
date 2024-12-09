@@ -82,3 +82,7 @@ anastasiaL -- 2024-12-09 09:54
 * added nav bar on login.html and register.html
 * added app routes for description, game, and leaderboard pages
 * fixed flashes in __init__.py
+
+tahmimH -- 2024-12-09 10:47
+* added code to determine if logged in- redirect to LOGIN
+* added code to add country to username
