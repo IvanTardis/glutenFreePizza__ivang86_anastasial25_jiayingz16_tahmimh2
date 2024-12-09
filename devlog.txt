@@ -71,3 +71,7 @@ michelleZ -- 2024-12-08 3:30
 * worked on leadership.html
 * added user profile feature on __init__.py
 * attempted fixing login/registration
+
+ivanG -- 2024-12-08 23:57
+* fixed country info getting code
+* noted an issue with prior code info-getting
