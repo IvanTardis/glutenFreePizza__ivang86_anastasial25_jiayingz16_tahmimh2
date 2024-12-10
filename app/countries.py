@@ -97,7 +97,7 @@ def getWeather(lat, long):
         print("Key File Not Found")
     else:
         weatherKey = file.readline()
-        restWeatherLink = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={weatherKey}"
+        restWeatherLink = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={weatherKey}&units=metric"
         # print(restWeatherLink)
         try:
             restWeatherURL = urllib.request.urlopen(restWeatherLink)
