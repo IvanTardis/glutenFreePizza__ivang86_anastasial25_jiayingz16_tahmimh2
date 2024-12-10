@@ -79,10 +79,21 @@ ivanG -- 2024-12-08 23:57
 anastasiaL -- 2024-12-09 09:54
 * fixed redirects for login and register
 * fixed links in nav bar on all html pages
-* added nav bar on login.html and register.html
 * added app routes for description, game, and leaderboard pages
 * fixed flashes in __init__.py
 
+ivanG -- 2024-12-09 11:01
+* got more info from selected countries
+
+michelleZ -- 2024-12-09 11:00
+* added logout feature in nabber for all html files
+* fixed links in nav bar on all html pages
+* figured out how to execute hint feature
+
+ivanG -- 2024-12-09 23:16
+* further fine tuned data-retrieval on selected country
+* worked on weather API call to get info on that country's capital
+* integrated some of the info-getting functions together
 tahmimH -- 2024-12-09 10:47
 * added code to determine if logged in- redirect to LOGIN
 * added code to add country to username

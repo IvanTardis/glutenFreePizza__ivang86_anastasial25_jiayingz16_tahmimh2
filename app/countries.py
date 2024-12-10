@@ -37,7 +37,7 @@ def randomCountry():
 def getCountryInfo(x):
 
     a = f"https://restcountries.com/v3.1/alpha/{x}"
-    
+
     # There was an issue with Python crashing because of the symbol of the currency breaking it, i suspect this is not unique to Turkey, so maybe we will get to that
     # a = f"https://restcountries.com/v3.1/alpha/TR"
 
@@ -59,17 +59,61 @@ def getCountryInfo(x):
         currencyLst.append(d[0]['currencies'][i]['name'])
     # print(currencyLst)
 
+    coords = []
+    for i in d[0]['capitalInfo']['latlng']:
+        # print(i)
+        # coords.append(d[0]['latlng'][i])
+        coords.append(i)
+
+    bordering = []
+    if 'borders' in d[0]:
+        for i in d[0]['borders']:
+            # print(i)
+            bordering.append(i)
+
     info = {
-        'name': d[0]['name']['common'],
+        'name': [d[0]['name']['common'], x],
         'unMember': d[0]['unMember'],
         'currency': currencyLst,
         'capital': d[0]['capital'],
         'region': d[0]['region'],
         'subregion': d[0]['subregion'],
-        'languages': langLst
+        'languages': langLst,
+        'LatLong': coords,
+        'landlocked': d[0]['landlocked'],
+        'borderingCountries': bordering,
+        'area': d[0]['area'],
+        'population': d[0]['population'],
+        'continents': d[0]['continents'],
+        'coatOfArms': d[0]['coatOfArms']['png']
     }
     # pprint.pp(info)
+    return info
 
+def getWeather(lat, long):
+    try:
+        file = open("keys/key_openWeatherMap.txt")
+    except:
+        print("Key File Not Found")
+    else:
+        weatherKey = file.readline()
+        restWeatherLink = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={weatherKey}&units=metric"
+        # print(restWeatherLink)
+        try:
+            restWeatherURL = urllib.request.urlopen(restWeatherLink)
+        except:
+            print("Weather API key not found")
+        else:
+            readWeather = restWeatherURL.read()
+            weatherDict = json.loads(readWeather)
+            # pprint.pp(weatherDict)
+    return weatherDict
 
-x = randomCountry()
-getCountryInfo(x)
+def getRandomHints():
+    dict = getCountryInfo(randomCountry())
+    weatherInfo = getWeather(dict['LatLong'][0],dict['LatLong'][1])
+    return 0
+
+# x = randomCountry()
+# getCountryInfo(x)
+getRandomHints()
