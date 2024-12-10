@@ -12,7 +12,7 @@ import random
 import sqlite3
 #from countries import *
 from user_db import *
-from countries.py import *
+from countries import *
 
 app = Flask(__name__)    #create Flask object
 
@@ -127,7 +127,6 @@ def profile():
     if 'username' in session:
         return render_template('profile.html', username = session['username'])
     return render_template('profile.html', username = "login to see profile") #temporary
-
 
 def getNewCountry(username):
     country = randomCountry(0)
