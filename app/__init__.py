@@ -18,7 +18,11 @@ app = Flask(__name__)    #create Flask object
 # makin' a supa-secret key
 app.secret_key = os.urandom(32)
 
+<<<<<<< HEAD
 # getHints()
+=======
+#getHints()
+>>>>>>> 53a7dbf7b1f560e85268343add8d7ce2741fa0a1
 createUsers()
 
 # GETTING A RANDOM FLAG URL
