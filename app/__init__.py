@@ -18,7 +18,7 @@ app = Flask(__name__)    #create Flask object
 # makin' a supa-secret key
 app.secret_key = os.urandom(32)
 
-getHints()
+# getHints()
 createUsers()
 
 # GETTING A RANDOM FLAG URL
@@ -118,11 +118,20 @@ def description():
 def game():
     country = randomCountry()
     info = getCountryInfo(country)
-    numInfo1 = random.randint(0,13)
-    infolist = list(info)
-    nameHint1, Hint1 = list(info.items())[numInfo1]
-    print(nameHint1)
-    print(Hint1)
+    names = []
+    hints = []
+    num = 0
+    while num < 14:
+        # lastnum = 0
+        # while lastnum == num:
+        #     lastnum = random.randint(0, 13)
+        nameHint, Hint = list(info.items())[num]
+        # lastnum = num
+        num+=1
+        names.append(nameHint)
+        hints.append(Hint)
+    pprint(names)
+    pprint(hints)
     return render_template('game.html')
 
 @app.route('/leaderboard', methods=["GET"])
