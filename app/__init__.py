@@ -12,7 +12,7 @@ import random
 import sqlite3
 #from countries import *
 from user_db import *
-from countries.py import *
+from countries import *
 
 app = Flask(__name__)    #create Flask object
 
@@ -116,6 +116,13 @@ def description():
 
 @app.route('/game', methods=["GET"])
 def game():
+    country = randomCountry()
+    info = getCountryInfo(country)
+    numInfo1 = random.randint(0,13)
+    infolist = list(info)
+    nameHint1, Hint1 = list(info.items())[numInfo1]
+    print(nameHint1)
+    print(Hint1)
     return render_template('game.html')
 
 @app.route('/leaderboard', methods=["GET"])
@@ -129,9 +136,8 @@ def profile():
     return render_template('profile.html', username = "login to see profile") #temporary
 
 
-def getNewCountry(username):
-    country = randomCountry(0)
-    getCountryInfo(country)
+
+
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
