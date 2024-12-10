@@ -116,7 +116,8 @@ def description():
 
 @app.route('/game', methods=["GET"])
 def game():
-    return render_template('game.html')
+    info = getCountryInfo(randomCountry())
+    return render_template('game.html', hints=info)
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():

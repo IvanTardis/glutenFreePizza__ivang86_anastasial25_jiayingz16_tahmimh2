@@ -107,7 +107,7 @@ def getWeather(lat, long):
             readWeather = restWeatherURL.read()
             weatherDict = json.loads(readWeather)
             # pprint.pp(weatherDict)
-    return weatherDict
+            return weatherDict
 
 def getRandomHints():
     dict = getCountryInfo(randomCountry())
