@@ -18,7 +18,7 @@ app = Flask(__name__)    #create Flask object
 # makin' a supa-secret key
 app.secret_key = os.urandom(32)
 
-getHints()
+#getHints()
 createUsers()
 
 # GETTING A RANDOM FLAG URL
@@ -123,7 +123,7 @@ def game():
     nameHint1, Hint1 = list(info.items())[numInfo1]
     print(nameHint1)
     print(Hint1)
-    return render_template('game.html')
+    return render_template('game.html', country=country)
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():
