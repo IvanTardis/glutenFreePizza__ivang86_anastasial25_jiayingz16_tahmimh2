@@ -11,6 +11,7 @@ import sqlite3
 from flask import Flask, render_template, request, session, redirect, flash, url_for
 from countries import *
 from user_db import *
+from countries import *
 
 app = Flask(__name__)    #create Flask object
 
@@ -115,7 +116,8 @@ def description():
 
 @app.route('/game', methods=["GET"])
 def game():
-    return render_template('game.html')
+    info = getCountryInfo(randomCountry())
+    return render_template('game.html', hints=info)
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():
@@ -126,6 +128,10 @@ def profile():
     if 'username' in session:
         return render_template('profile.html', username = session['username'])
     return render_template('profile.html', username = "login to see profile") #temporary
+
+def getNewCountry(username):
+    country = randomCountry(0)
+    getCountryInfo(country)
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

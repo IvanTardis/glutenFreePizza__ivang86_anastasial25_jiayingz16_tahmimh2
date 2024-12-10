@@ -117,7 +117,7 @@ def getHints(x):
     pprint.pp(countryInfo)
     weatherInfo = getWeather(countryInfo['LatLong'][0],countryInfo['LatLong'][1])
     pprint.pp(weatherInfo)
-    
+
     hints = []
 
     return 0
