@@ -94,6 +94,10 @@ ivanG -- 2024-12-09 23:16
 * further fine tuned data-retrieval on selected country
 * worked on weather API call to get info on that country's capital
 * integrated some of the info-getting functions together
+
 tahmimH -- 2024-12-09 10:47
 * added code to determine if logged in- redirect to LOGIN
 * added code to add country to username
+
+tahmimH -- 2024-12-10 11:01
+* added preliminary game code to get a country and first hint
