@@ -41,7 +41,7 @@ def getCountryInfo(x):
     # There was an issue with Python crashing because of the symbol of the currency breaking it, i suspect this is not unique to Turkey, so maybe we will get to that
     # a = f"https://restcountries.com/v3.1/alpha/TR"
 
-    # print(a)
+    print(a)
     b = urllib.request.urlopen(a)
     c = b.read()
     d = json.loads(c)
@@ -97,6 +97,7 @@ def getWeather(lat, long):
         print("Key File Not Found")
     else:
         weatherKey = file.readline()
+        weatherKey = weatherKey[:-1]
         restWeatherLink = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={weatherKey}&units=metric"
         # print(restWeatherLink)
         try:
@@ -107,13 +108,20 @@ def getWeather(lat, long):
             readWeather = restWeatherURL.read()
             weatherDict = json.loads(readWeather)
             # pprint.pp(weatherDict)
-    return weatherDict
+            return weatherDict
 
-def getRandomHints():
-    dict = getCountryInfo(randomCountry())
-    weatherInfo = getWeather(dict['LatLong'][0],dict['LatLong'][1])
+def getHints(x):
+    if x == "":
+        x = randomCountry()
+    countryInfo = getCountryInfo(x)
+    pprint.pp(countryInfo)
+    weatherInfo = getWeather(countryInfo['LatLong'][0],countryInfo['LatLong'][1])
+    pprint.pp(weatherInfo)
+
+    hints = []
+
     return 0
 
 # x = randomCountry()
 # getCountryInfo(x)
-getRandomHints()
+getHints("")

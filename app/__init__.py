@@ -3,14 +3,13 @@
 # SoftDev
 # Dec 2024
 
-from flask import Flask, render_template, request, session, redirect, flash, url_for
-
 import urllib.request
 import json
 import os
 import random
 import sqlite3
-#from countries import *
+from flask import Flask, render_template, request, session, redirect, flash, url_for
+from countries import *
 from user_db import *
 from countries import *
 
@@ -19,6 +18,7 @@ app = Flask(__name__)    #create Flask object
 # makin' a supa-secret key
 app.secret_key = os.urandom(32)
 
+getHints()
 createUsers()
 
 # GETTING A RANDOM FLAG URL
@@ -134,8 +134,6 @@ def profile():
     if 'username' in session:
         return render_template('profile.html', username = session['username'])
     return render_template('profile.html', username = "login to see profile") #temporary
-
-
 
 
 
