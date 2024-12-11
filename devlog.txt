@@ -99,6 +99,9 @@ tahmimH -- 2024-12-09 10:47
 * added code to determine if logged in- redirect to LOGIN
 * added code to add country to username
 
+ivanG -- 2024-12-10 11:00
+* continued working on hints mechanism with weather and country APIs
+
 tahmimH -- 2024-12-10 11:01
 * added preliminary game code to get a country and first hint
 
