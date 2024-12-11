@@ -116,10 +116,16 @@ def description():
 
 @app.route('/game', methods=["GET"])
 def game():
-    country = randomCountry()
+    hintnum = numHints(username, country)
+    #sees if there are any hints (if there is currently a country going on)
+    if (hintnum == 0):
+        country = randomCountry()
+        newGame(username, country)
+    #if there is a game going on already, gets from current game, if not, upper code works
+    country = getcurrCountry(uername)
     info = getCountryInfo(country)
-    names = []
-    hints = []
+    names = ['weather']
+    hints = [getWeather(info['LatLong'][0], info['LatLong'][1])]
     num = 0
     while num < 14:
         # lastnum = 0
@@ -130,8 +136,19 @@ def game():
         num+=1
         names.append(nameHint)
         hints.append(Hint)
-    pprint(names)
-    pprint(hints)
+    print(names)
+    print(hints)
+    hints = ""
+    hinters = 0
+    while hinters < hintnum:
+        hints += '''
+                    <li>
+                    '''
+    newguess = request.form['guess']
+    if newguess.lower() == country.lower():
+        finishGame(username)
+    else:
+        newHint(username)
     return render_template('game.html')
 
 @app.route('/leaderboard', methods=["GET"])
