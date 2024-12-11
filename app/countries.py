@@ -92,7 +92,7 @@ def getCountryInfo(x):
 
 def getWeather(lat, long):
     try:
-        file = open("keys/key_openWeatherMap.txt")
+        file = open("./keys/key_openWeatherMap.txt")
     except:
         print("Key File Not Found")
     else:
