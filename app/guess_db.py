@@ -63,6 +63,16 @@ def newHint(username):
     guesses.commit()
 
 def deleteGuesses():
-    guesses = sqlite3.connect(GUESS_FILE) 
+    guesses = sqlite3.connect(GUESS_FILE) guesses = sqlite3.connect(GUESS_FILE)
+    c = guesses.cursor()
     c = guesses.cursor()
     c.execute("DROP table guesses")
+
+def getCurrCountry(username):
+        guesses = sqlite3.connect(GUESS_FILE)
+        c = guesses.cursor()
+        c.execute("SELECT c_curr FROM guesses WHERE username = ?, c_curr = ?", (username) )
+def numHints(username, country):
+    guesses = sqlite3.connect(GUESS_FILE)
+    c = guesses.cursor()
+    c.execute("SELECT hint_num FROM guesses WHERE username = ?, c_curr = ?", (username, country) )
