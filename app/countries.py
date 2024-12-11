@@ -124,4 +124,4 @@ def getHints(x):
 
 # x = randomCountry()
 # getCountryInfo(x)
-getHints("")
+# getHints("")

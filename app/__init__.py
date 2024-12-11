@@ -118,6 +118,7 @@ def description():
 
 @app.route('/game', methods=["GET"])
 def game():
+    # getHints("")
     country = randomCountry()
     info = getCountryInfo(country)
     names = []
