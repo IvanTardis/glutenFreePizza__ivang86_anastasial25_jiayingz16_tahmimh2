@@ -11,6 +11,7 @@ import sqlite3
 from flask import Flask, render_template, request, session, redirect, flash, url_for
 from countries import *
 from user_db import *
+from guess_db import *
 from countries import *
 
 app = Flask(__name__)    #create Flask object
@@ -20,6 +21,7 @@ app.secret_key = os.urandom(32)
 
 #getHints()
 createUsers()
+createGuesses()
 
 # GETTING A RANDOM FLAG URL
 # x = randomCountry()
@@ -141,7 +143,9 @@ def leaderboard():
 @app.route('/profile', methods=["GET"])
 def profile():
     if 'username' in session:
-        return render_template('profile.html', username = session['username'])
+        username = session['username']
+        print(profileArr(username))
+        return render_template('profile.html', username = username)
     return render_template('profile.html', username = "login to see profile") #temporary
 
 
