@@ -11,6 +11,7 @@ import sqlite3
 from flask import Flask, render_template, request, session, redirect, flash, url_for
 from countries import *
 from user_db import *
+from guess_db import *
 from countries import *
 
 app = Flask(__name__)    #create Flask object
@@ -20,6 +21,7 @@ app.secret_key = os.urandom(32)
 
 #getHints()
 createUsers()
+createGuesses()
 
 # GETTING A RANDOM FLAG URL
 # x = randomCountry()
@@ -116,6 +118,7 @@ def description():
 
 @app.route('/game', methods=["GET"])
 def game():
+<<<<<<< HEAD
     hintnum = numHints(username, country)
     #sees if there are any hints (if there is currently a country going on)
     if (hintnum == 0):
@@ -123,6 +126,10 @@ def game():
         newGame(username, country)
     #if there is a game going on already, gets from current game, if not, upper code works
     country = getcurrCountry(uername)
+=======
+    # getHints("")
+    country = randomCountry()
+>>>>>>> 7f49468e8067de0a87a0e1ab6b47434d2660fa05
     info = getCountryInfo(country)
     names = ['weather']
     hints = [getWeather(info['LatLong'][0], info['LatLong'][1])]
@@ -158,7 +165,9 @@ def leaderboard():
 @app.route('/profile', methods=["GET"])
 def profile():
     if 'username' in session:
-        return render_template('profile.html', username = session['username'])
+        username = session['username']
+        print(profileArr(username))
+        return render_template('profile.html', username = username)
     return render_template('profile.html', username = "login to see profile") #temporary
 
 

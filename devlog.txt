@@ -108,3 +108,11 @@ tahmimH -- 2024-12-10 11:01
 michelleZ -- 2024-12-10 10:30
 * added split screen in game.html
 * assisted implementation of display of hints
+
+anastasiaL -- 2024-12-11 10:38
+* fixed navbar link to logout
+* wrote profileArr and top10 methods in guess_db.py
+
+ivanG -- 2024-12-11 11:00
+* battled with key not found error with weather api; it was just running the file from within app
+* worked on hints and some stuff with hint apis

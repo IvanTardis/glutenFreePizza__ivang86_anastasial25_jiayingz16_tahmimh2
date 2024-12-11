@@ -62,6 +62,22 @@ def newHint(username):
     c.execute("UPDATE guesses SET hint_num = ? WHERE username = ?", (old_hint_num+1, username))
     guesses.commit()
 
+def profileArr(username):
+    guesses = sqlite3.connect(GUESS_FILE)
+    c = guesses.cursor()
+    c.execute("SELECT * FROM guesses") 
+              # WHERE username = ?", (username,))
+    arr = c.fetchall()
+    return arr
+
+def leaderboard():
+    guesses = sqlite3.connect(GUESS_FILE)
+    c = guesses.cursor()
+    c.execute("SELECT g_avg FROM guesses")
+    arr = c.fetchall()
+    top10 = sorted(arr)[:10]
+    return top10
+
 def deleteGuesses():
     guesses = sqlite3.connect(GUESS_FILE) guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
