@@ -179,8 +179,6 @@ def profile():
         return render_template('profile.html', username = username)
     return render_template('profile.html', username = "login to see profile") #temporary
 
-
-
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
     app.debug = True

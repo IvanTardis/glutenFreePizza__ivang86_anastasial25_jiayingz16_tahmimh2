@@ -120,3 +120,7 @@ ivanG -- 2024-12-11 11:00
 tahmimH -- 2024-12-11 11:00
 * fighting to figure out logic to output only current hints based on guesses
 * added rudimentary databse functions to grab certain values
+
+michelleZ -- 2024-12-11 11:00
+* tried to reconcile flash messages errors
+* added contributors feature to game.html
