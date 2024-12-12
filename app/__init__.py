@@ -76,6 +76,7 @@ def auth_login():
             return redirect('/login')
 
         session['username'] = username
+        addUserG(session['username'])
         flash("Login successful", "success")
         return redirect('/')
     return redirect('/')
@@ -118,21 +119,28 @@ def description():
 
 @app.route('/game', methods=["GET"])
 def game():
-<<<<<<< HEAD
-    hintnum = numHints(username, country)
-    #sees if there are any hints (if there is currently a country going on)
-    if (hintnum == 0):
-        country = randomCountry()
-        newGame(username, country)
+    if 'username' in session:
+        username = session['username']
+    else:
+        return redirect('/login')
+    # hintnum = numHints(username)
+    # #sees if there are any hints (if there is currently a country going on)
+    # if (hintnum == 0):
+    #     country = randomCountry()
+    #     pprint('broken')
+    #     newGame(username, country)
+    #     return
+    # else:
+    #     country = getcurrCountry(username)
+    #     pprint(country)
+    #     return
     #if there is a game going on already, gets from current game, if not, upper code works
-    country = getcurrCountry(uername)
-=======
-    # getHints("")
     country = randomCountry()
->>>>>>> 7f49468e8067de0a87a0e1ab6b47434d2660fa05
+    newGame(username, country)
+    hintnum = numHints(username)
     info = getCountryInfo(country)
     names = ['weather']
-    hints = [getWeather(info['LatLong'][0], info['LatLong'][1])]
+    hints = [" " + getWeather(info['LatLong'][0] + info['LatLong'][1])]
     num = 0
     while num < 14:
         # lastnum = 0
@@ -148,9 +156,10 @@ def game():
     hints = ""
     hinters = 0
     while hinters < hintnum:
-        hints += '''
-                    <li>
-                    '''
+        namehint = names[hinters]
+        print(hinters)
+        hint = hints[hinters]
+        hints += f"<li>This country's {namehint}  data is: {hint} </li>"
     newguess = request.form['guess']
     if newguess.lower() == country.lower():
         finishGame(username)
