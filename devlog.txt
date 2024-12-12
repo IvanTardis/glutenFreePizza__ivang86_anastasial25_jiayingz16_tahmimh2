@@ -116,3 +116,7 @@ anastasiaL -- 2024-12-11 10:38
 ivanG -- 2024-12-11 11:00
 * battled with key not found error with weather api; it was just running the file from within app
 * worked on hints and some stuff with hint apis
+
+tahmimH -- 2024-12-11 11:00
+* fighting to figure out logic to output only current hints based on guesses
+* added rudimentary databse functions to grab certain values
