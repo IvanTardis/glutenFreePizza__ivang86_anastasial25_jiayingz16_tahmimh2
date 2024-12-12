@@ -118,7 +118,6 @@ def description():
 
 @app.route('/game', methods=["GET"])
 def game():
-<<<<<<< HEAD
     hintnum = numHints(username, country)
     #sees if there are any hints (if there is currently a country going on)
     if (hintnum == 0):
@@ -126,10 +125,8 @@ def game():
         newGame(username, country)
     #if there is a game going on already, gets from current game, if not, upper code works
     country = getcurrCountry(uername)
-=======
     # getHints("")
     country = randomCountry()
->>>>>>> 7f49468e8067de0a87a0e1ab6b47434d2660fa05
     info = getCountryInfo(country)
     names = ['weather']
     hints = [getWeather(info['LatLong'][0], info['LatLong'][1])]
@@ -169,8 +166,6 @@ def profile():
         print(profileArr(username))
         return render_template('profile.html', username = username)
     return render_template('profile.html', username = "login to see profile") #temporary
-
-
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

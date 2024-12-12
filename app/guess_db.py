@@ -79,7 +79,7 @@ def leaderboard():
     return top10
 
 def deleteGuesses():
-    guesses = sqlite3.connect(GUESS_FILE) guesses = sqlite3.connect(GUESS_FILE)
+    guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
     c = guesses.cursor()
     c.execute("DROP table guesses")
