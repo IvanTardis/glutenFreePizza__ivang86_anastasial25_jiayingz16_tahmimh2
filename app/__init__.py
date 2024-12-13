@@ -78,8 +78,8 @@ def auth_login():
         else:
             session['username'] = username
             addUserG(session['username'])
-            flash("Login successful", "success")
             return redirect('/')
+        
     return redirect('/')
 
 # USER REGISTRATIONS
@@ -117,7 +117,7 @@ def logout():
 def description():
     return render_template('description.html')
 
-@app.route('/game', methods=["GET"])
+@app.route('/game', methods=["GET", "POST"])
 def game():
     if 'username' in session:
         username = session['username']
