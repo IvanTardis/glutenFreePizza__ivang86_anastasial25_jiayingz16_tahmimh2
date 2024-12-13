@@ -117,30 +117,30 @@ def logout():
 def description():
     return render_template('description.html')
 
-@app.route('/game', methods=["GET"])
+@app.route('/game', methods=["GET", "POST"])
 def game():
     if 'username' in session:
         username = session['username']
     else:
         return redirect('/login')
-    # hintnum = numHints(username)
-    # #sees if there are any hints (if there is currently a country going on)
-    # if (hintnum == 0):
-    #     country = randomCountry()
-    #     pprint('broken')
-    #     newGame(username, country)
-    #     return
-    # else:
-    #     country = getcurrCountry(username)
-    #     pprint(country)
-    #     return
+    hintnum = numHints(username)
+    #sees if there are any hints (if there is currently a country going on)
+    if (hintnum == 0):
+        country = randomCountry()
+        pprint('broken')
+        newGame(username, country)
+    else:
+        country = getcurrCountry(username)
     #if there is a game going on already, gets from current game, if not, upper code works
     country = randomCountry()
+    print(country)
     newGame(username, country)
     hintnum = numHints(username)
     info = getCountryInfo(country)
-    names = ['weather']
-    hints = [" " + getWeather(info['LatLong'][0] + info['LatLong'][1])]
+    names = []
+    hints = []
+    # names = ['weather']
+    # hints = [" " + getWeather(info['LatLong'][0] + info['LatLong'][1])]
     num = 0
     while num < 14:
         # lastnum = 0
@@ -151,21 +151,24 @@ def game():
         num+=1
         names.append(nameHint)
         hints.append(Hint)
-    print(names)
-    print(hints)
-    hints = ""
+    hintse = ""
     hinters = 0
     while hinters < hintnum:
+        print (names[hinters])
         namehint = names[hinters]
         print(hinters)
         hint = hints[hinters]
-        hints += f"<li>This country's {namehint}  data is: {hint} </li>"
-    newguess = request.form['guess']
-    if newguess.lower() == country.lower():
-        finishGame(username)
-    else:
-        newHint(username)
-    return render_template('game.html')
+        hintse += f"<li>This country's {namehint}  data is: {hint} </li>/"
+        hinters +=1
+    if request.method == "POST":
+        newguess = request.form['guess']
+        if newguess.lower() == country.lower():
+            finishGame(username)
+            return redirect('/game')
+        else:
+            newHint(username)
+            return redirect('/game')
+    return render_template('game.html', country = hintse)
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():

@@ -124,3 +124,7 @@ tahmimH -- 2024-12-11 11:00
 michelleZ -- 2024-12-11 11:00
 * tried to reconcile flash messages errors
 * added contributors feature to game.html
+
+tahmimH -- 2024-12-13 10:45
+* still trying to fix logic with game page
+* Nothing is broken right now, but need to insert logic for the game
