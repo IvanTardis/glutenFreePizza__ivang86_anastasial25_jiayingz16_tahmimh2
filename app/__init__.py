@@ -75,10 +75,11 @@ def auth_login():
             flash(message, 'danger')
             return redirect('/login')
 
-        session['username'] = username
-        addUserG(session['username'])
-        flash("Login successful", "success")
-        return redirect('/')
+        else:
+            session['username'] = username
+            addUserG(session['username'])
+            flash("Login successful", "success")
+            return redirect('/')
     return redirect('/')
 
 # USER REGISTRATIONS
@@ -108,9 +109,8 @@ def auth_reg():
 # USER LOGOUTS
 @app.route('/logout', methods=["GET", "POST"])
 def logout():
-    session.pop('username', None)
-    session.pop('password', None)
-    flash("You have been logged out.", "info")
+    session.clear()
+    flash("Logged out successfully", 'info')
     return redirect("/login")
 
 @app.route('/description', methods=["GET"])
