@@ -79,7 +79,7 @@ def auth_login():
             session['username'] = username
             addUserG(session['username'])
             return redirect('/')
-        
+
     return redirect('/')
 
 # USER REGISTRATIONS
@@ -123,22 +123,15 @@ def game():
         username = session['username']
     else:
         return redirect('/login')
-    # hintnum = numHints(username)
-    # #sees if there are any hints (if there is currently a country going on)
-    # if (hintnum == 0):
-    #     country = randomCountry()
-    #     pprint('broken')
-    #     newGame(username, country)
-    #     return
-    # else:
-    #     country = getcurrCountry(username)
-    #     pprint(country)
-    #     return
-    #if there is a game going on already, gets from current game, if not, upper code works
-    country = randomCountry()
-    newGame(username, country)
+    country = getcurrCountry(username)
     hintnum = numHints(username)
-    info = getCountryInfo(country)
+
+    if country == "N/A":
+        hints = getHints("")
+        # country
+        newGame(username, country)
+    else:
+        hints = getHints(country)
     names = ['weather']
     hints = [" " + getWeather(info['LatLong'][0] + info['LatLong'][1])]
     num = 0

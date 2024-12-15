@@ -47,6 +47,7 @@ def finishGame(username):
     c_num = c.fetchone()[0]
     new_g_avg = g_total/c_num
     c.execute("UPDATE guesses SET g_avg = ? WHERE username = ?", (new_g_avg, username))
+    c.execute("UPDATE guesses SET c_curr = ? WHERE username = ?", ("N/A", username))
     guesses.commit()
 
 def newHint(username):

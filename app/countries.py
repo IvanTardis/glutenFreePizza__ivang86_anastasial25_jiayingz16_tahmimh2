@@ -73,7 +73,6 @@ def getCountryInfo(x):
 
     info = {
         'name': [d[0]['name']['common'], x],
-        'unMember': d[0]['unMember'],
         'currency': currencyLst,
         'capital': d[0]['capital'],
         'region': d[0]['region'],
