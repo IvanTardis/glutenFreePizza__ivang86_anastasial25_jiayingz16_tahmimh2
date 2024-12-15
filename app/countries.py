@@ -14,7 +14,7 @@ from user_db import *
 
 
 # Load in a Dict of Countries
-restCountriesLink = "https://restcountries.com/v3.1/independent?fields=name,cca2"
+restCountriesLink = "https://restcountries.com/v3.1/independent?fields=name,cca2,cca3"
 restCountriesURL = urllib.request.urlopen(restCountriesLink)
 readCountries = restCountriesURL.read()
 countryDict = json.loads(readCountries)
@@ -23,7 +23,7 @@ cleanerDict = {}
 i = 0
 for country in countryDict:
     # print(country)
-    cleanerDict[i] = country['name']['common'], country['cca2']
+    cleanerDict[i] = country['name']['common'], country['cca2'], country['cca3']
     i+=1
 # pprint.pp(cleanerDict)
 
@@ -109,18 +109,49 @@ def getWeather(lat, long):
             # pprint.pp(weatherDict)
             return weatherDict
 
+def getCountryFullName(cca3):
+    for i in cleanerDict:
+        if cca3 in cleanerDict[i]:
+            return cleanerDict[i][0]
+
 def getHints(x):
     if x == "":
         x = randomCountry()
     countryInfo = getCountryInfo(x)
     pprint.pp(countryInfo)
     weatherInfo = getWeather(countryInfo['LatLong'][0],countryInfo['LatLong'][1])
-    pprint.pp(weatherInfo)
+    # pprint.pp(weatherInfo)
+
+    # print(weatherInfo['main']['temp'])
 
     hints = []
+    hints.append(["Temperature: " + str(weatherInfo['main']['temp']) + "°C" , "Feels Like: " + str(weatherInfo['main']['feels_like']) + "°C" , "Weather Description: " + weatherInfo['weather'][0]['main'] + "; " + weatherInfo['weather'][0]['description']])
+
+    continents = countryInfo['continents']
+    x = len(continents)
+    contStr = "Continent(s): "
+    hint2 = []
+    for i in continents:
+        contStr += i + " "
+    pop = str(countryInfo['population'])
+    # print("POP: " +)
+    hints.append([contStr, "Area: " + str(countryInfo['area'])+ " km²", "Population: " + pop])
+
+    coaIMG = f"<img src=\"{countryInfo['coatOfArms']}\" alt=\"Coat of Arms\" width=\"500\" height=\"600\">"
+    hints.append(["Subregion: " + countryInfo['subregion'], coaIMG, "Land Locked?: " + str(countryInfo['landlocked'])])
+
+    bord = "Bordering Countries: "
+    for i in countryInfo['borderingCountries']:
+        bord += getCountryFullName(i) + " "
+    if len(countryInfo['borderingCountries']) == 0:
+        bord += "None"
+    hints.append(["Captial: " + countryInfo['capital'][0], bord])
+
+
+    pprint.pp(hints)
 
     return 0
 
 # x = randomCountry()
 # getCountryInfo(x)
-# getHints("")
+getHints("")
