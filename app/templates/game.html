@@ -63,7 +63,7 @@
           <ul>
             {% for hint in hints %}
               {% for sub in hint %}
-                <li>{{sub}}</li>
+                <li>{{sub|safe}}</li>
               {% endfor %}
              <br>
             {% endfor %}

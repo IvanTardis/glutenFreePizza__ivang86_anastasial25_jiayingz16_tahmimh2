@@ -146,7 +146,7 @@ def getHints(x):
     # print("POP: " +)
     hints.append([contStr, "Area: " + str(countryInfo['area'])+ " km²", "Population: " + pop])
 
-    coaIMG = f"<img src=\"{countryInfo['coatOfArms']}\" alt=\"Coat of Arms\" width=\"500\" height=\"600\">"
+    coaIMG = f"<img src=\"{countryInfo['coatOfArms']}\" alt=\"Coat of Arms\" width=\"100\" height=\"150\">"
     hints.append(["Subregion: " + countryInfo['subregion'], coaIMG, "Land Locked?: " + str(countryInfo['landlocked'])])
 
     bord = "Bordering Countries: "
@@ -175,7 +175,7 @@ def getHints(x):
         langStr += i + "; "
     hints.append([currencyStr, langStr])
 
-    flagIMG = f"<img src=\"https://flagsapi.com/{countryInfo['name'][1]}/flat/64.png\" alt=\"Flag\" width=\"500\" height=\"600\">"
+    flagIMG = f"<img src=\"https://flagsapi.com/{countryInfo['name'][1]}/flat/64.png\" alt=\"Flag\" width=\"100\" height=\"150\">"
     hints.append([flagIMG])
 
     hints.append(["The country was: ", countryInfo['name'][0]])
