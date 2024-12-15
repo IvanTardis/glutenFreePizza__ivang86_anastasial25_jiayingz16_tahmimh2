@@ -147,6 +147,24 @@ def getHints(x):
         bord += "None"
     hints.append(["Captial: " + countryInfo['capital'][0], bord])
 
+    if len(countryInfo['currency']) > 1:
+        currencyStr = "Currencies: "
+    else:
+        currencyStr = "Currency: "
+    for i in countryInfo['currency']:
+        currencyStr += i + " "
+    if len(countryInfo['languages']) > 1:
+        langStr = "Languages: "
+    else:
+        langStr = "Language: "
+    for i in countryInfo['languages']:
+        langStr += i + " "
+    hints.append([currencyStr, langStr])
+
+    flagIMG = f"<img src=\"https://flagsapi.com/{countryInfo['name'][1]}/flat/64.png\" alt=\"Flag\" width=\"500\" height=\"600\">"
+    hints.append([flagIMG])
+
+    hints.append(["The country was: ", countryInfo['name'][0]])
 
     pprint.pp(hints)
 
