@@ -133,7 +133,7 @@ def game():
         newGame(username, country)
     else:
         hints = getHints(country)
-    
+
     guess_result = None
     # print(newHint)
     # print(hints[6][1])
@@ -161,20 +161,18 @@ def game():
                     hintnum = numHints(username)
                 else:
                     hintnum += 1
-                    
+
     if hintnum >= 7:
         flash("You failed to guess the country correctly.", 'danger')
         finishGame(username)
         inProgress = False
-        
+
     sender = hints[:hintnum]
     sender.reverse()
-    
-    if(inProgress):
-        return render_template('game.html', hints=sender, guess_result=guess_result)
+
     countryLst = nameLst()
     if(inProgress):
-        return render_template('game.html', hints=sender, countries=countryLst)
+        return render_template('game.html', hints=sender, guess_result=guess_result, countries=countryLst)
     else:
         return render_template('gameDone.html', hints=sender)
 
