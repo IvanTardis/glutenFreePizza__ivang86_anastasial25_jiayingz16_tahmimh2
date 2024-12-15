@@ -28,6 +28,20 @@ for country in countryDict:
 # pprint.pp(cleanerDict)
 
 
+def nameLst():
+    rcLink = "https://restcountries.com/v3.1/independent?fields=name,cca2,cca3"
+    rcURL = urllib.request.urlopen(restCountriesLink)
+    readRC = restCountriesURL.read()
+    loader = json.loads(readCountries)
+
+    names = []
+    i = 0
+    for country in loader:
+        # print(country)
+        names.append(country['name']['common'])
+        i+=1
+    return names
+
 # Returns the 2 letter code of a random country from our dict
 def randomCountry():
     x = random.randint(0,193)
@@ -142,9 +156,10 @@ def getHints(x):
     hint2 = []
     for i in continents:
         contStr += i + "; "
-    pop = str(countryInfo['population'])
+    pop = '{:,}'.format(countryInfo['population'])
+    area = '{:,}'.format(countryInfo['area'])
     # print("POP: " +)
-    hints.append([contStr, "Area: " + str(countryInfo['area'])+ " km²", "Population: " + pop])
+    hints.append([contStr, "Area: " + area + " km²", "Population: " + pop])
 
     coaIMG = f"<img src=\"{countryInfo['coatOfArms']}\" alt=\"Coat of Arms\" width=\"100\" height=\"150\">"
     hints.append(["Subregion: " + countryInfo['subregion'], coaIMG, "Land Locked?: " + str(countryInfo['landlocked'])])

@@ -143,7 +143,7 @@ def game():
 
         if newguess != "1p2490ufahsbfgoagh0qr8201":
             if newguess.lower() == country.lower():
-                print("USER WON")
+                # print("USER WON")
                 if hintnum > 1:
                     winMSG = "Congratulations! You guessed " + country + " correctly after " + str(hintnum) + " hints."
                 else:
@@ -164,8 +164,9 @@ def game():
         inProgress = False
     sender = hints[:hintnum]
     sender.reverse()
+    countryLst = nameLst()
     if(inProgress):
-        return render_template('game.html', hints=sender)
+        return render_template('game.html', hints=sender, countries=countryLst)
     else:
         return render_template('gameDone.html', hints=sender)
 
