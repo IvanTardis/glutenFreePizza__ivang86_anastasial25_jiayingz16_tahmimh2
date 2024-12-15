@@ -134,7 +134,7 @@ ivanG -- 2024-12-14 21:08
 * mildly started working on game page display, mostly working on the code, not working yet though
 * planned out on paper what my logic needs to look like
 
-ivanG -- 2024-12-15 2:30
+ivanG -- 2024-12-15 14:30
 * got the hints on the display page working correctly
 * put in logic for different cases (game won, lost, starting new game)
 * tested out and got image hints working
@@ -144,3 +144,7 @@ michelleZ -- 2024-12-15 17:00
 * added restart game button
 * modified __init__.py to incorporate above changes
 
+ivanG -- 2024-12-15 17:30
+* got a list of potential countries to be display for user to choose from
+* this involved additional HTML and python code in countries
+* also added commas to pop and area stats
