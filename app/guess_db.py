@@ -18,7 +18,7 @@ def addUserG(username):
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
     if (c.execute("SELECT 1 FROM guesses WHERE username=?", (username,))).fetchone() == None:
-        c.execute("INSERT INTO guesses (username, g_total, c_num, g_avg, c_curr, hint_num) VALUES (?, ?, ?, ?, ?, ?)", (username, 0, 0, 0, "N/A", 0))
+        c.execute("INSERT INTO guesses (username, g_total, c_num, g_avg, c_curr, hint_num) VALUES (?, ?, ?, ?, ?, ?)", (username, 0, 0, 0, "N/A", 1))
         guesses.commit()
         return
     return "Username taken"
@@ -48,6 +48,7 @@ def finishGame(username):
     new_g_avg = g_total/c_num
     c.execute("UPDATE guesses SET g_avg = ? WHERE username = ?", (new_g_avg, username))
     c.execute("UPDATE guesses SET c_curr = ? WHERE username = ?", ("N/A", username))
+    c.execute("UPDATE guesses SET hint_num = ? WHERE username = ?", (1, username))
     guesses.commit()
 
 def newHint(username):

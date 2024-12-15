@@ -123,9 +123,10 @@ def game():
         username = session['username']
     else:
         return redirect('/login')
+    inProgress = True
     country = getcurrCountry(username)
     hintnum = numHints(username)
-
+    # print("HINTS: " + str(hintnum))
     if country == "N/A":
         hints = getHints("")
         country = hints[6][1]
@@ -133,18 +134,40 @@ def game():
     else:
         hints = getHints(country)
     # print(newHint)
-    print(hints[6][1])
-    print("CORRECT ANSWER: " + country)
+    # print(hints[6][1])
+    # print("CORRECT ANSWER: " + country)
     if request.method == 'POST':
         newguess = request.form['guess']
-        print("USER ENTERED: " + newguess)
-        print("CORRECT ANSWER: " + country)
-        if newguess.lower() == country.lower():
-            finishGame(username)
-        else:
-            newHint(username)
-            hintnum = numHints(username)
-    return render_template('game.html', hints=hints[:hintnum])
+        # print("USER ENTERED: " + newguess)
+        # print("CORRECT ANSWER: " + country)
+
+        if newguess != "1p2490ufahsbfgoagh0qr8201":
+            if newguess.lower() == country.lower():
+                print("USER WON")
+                if hintnum > 1:
+                    winMSG = "Congratulations! You guessed " + country + " correctly after " + str(hintnum) + " hints."
+                else:
+                    winMSG = "Congratulations! You guessed " + country + " correctly after " + str(hintnum) + " hint."
+                flash(winMSG, 'success')
+                finishGame(username)
+                inProgress = False
+                # session.pop('guess', None)
+            else:
+                if hintnum < 6:
+                    newHint(username)
+                    hintnum = numHints(username)
+                else:
+                    hintnum += 1
+    if hintnum >= 7:
+        flash("You failed to guess the country correctly.", 'danger')
+        finishGame(username)
+        inProgress = False
+    sender = hints[:hintnum]
+    sender.reverse()
+    if(inProgress):
+        return render_template('game.html', hints=sender)
+    else:
+        return render_template('gameDone.html', hints=sender)
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():
