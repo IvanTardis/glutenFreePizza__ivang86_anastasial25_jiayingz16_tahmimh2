@@ -125,6 +125,10 @@ michelleZ -- 2024-12-11 11:00
 * tried to reconcile flash messages errors
 * added contributors feature to game.html
 
+michelleZ -- 2024-12-12 11:00
+* reconciled flash messages errors
+* tried connecting frontend to backend
+
 ivanG -- 2024-12-14 21:08
 * formatted user hints into a list to be used on game page
 * mildly started working on game page display, mostly working on the code, not working yet though
@@ -134,3 +138,9 @@ ivanG -- 2024-12-15 2:30
 * got the hints on the display page working correctly
 * put in logic for different cases (game won, lost, starting new game)
 * tested out and got image hints working
+
+michelleZ -- 2024-12-15 17:00
+* styled game page & hints display
+* added restart game button
+* modified __init__.py to incorporate above changes
+

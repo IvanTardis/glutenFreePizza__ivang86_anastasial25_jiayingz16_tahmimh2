@@ -133,6 +133,8 @@ def game():
         newGame(username, country)
     else:
         hints = getHints(country)
+    
+    guess_result = None
     # print(newHint)
     # print(hints[6][1])
     # print("CORRECT ANSWER: " + country)
@@ -153,21 +155,36 @@ def game():
                 inProgress = False
                 # session.pop('guess', None)
             else:
+                guess_result = "incorrect"
                 if hintnum < 6:
                     newHint(username)
                     hintnum = numHints(username)
                 else:
                     hintnum += 1
+                    
     if hintnum >= 7:
         flash("You failed to guess the country correctly.", 'danger')
         finishGame(username)
         inProgress = False
+        
     sender = hints[:hintnum]
     sender.reverse()
+    
     if(inProgress):
-        return render_template('game.html', hints=sender)
+        return render_template('game.html', hints=sender, guess_result=guess_result)
     else:
         return render_template('gameDone.html', hints=sender)
+
+@app.route('/restart', methods=["POST"])
+def restart():
+    if 'username' in session:
+        username = session['username']
+        finishGame(username)
+        flash("Game restarted!", 'info')
+        return redirect('/game')
+    else:
+        flash("You must log in to restart the game.", 'danger')
+        return redirect('/login')
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():
