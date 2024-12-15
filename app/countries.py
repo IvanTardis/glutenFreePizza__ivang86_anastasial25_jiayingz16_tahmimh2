@@ -132,7 +132,7 @@ def getHints(x):
     contStr = "Continent(s): "
     hint2 = []
     for i in continents:
-        contStr += i + " "
+        contStr += i + "; "
     pop = str(countryInfo['population'])
     # print("POP: " +)
     hints.append([contStr, "Area: " + str(countryInfo['area'])+ " km²", "Population: " + pop])
@@ -142,7 +142,7 @@ def getHints(x):
 
     bord = "Bordering Countries: "
     for i in countryInfo['borderingCountries']:
-        bord += getCountryFullName(i) + " "
+        bord += getCountryFullName(i) + "; "
     if len(countryInfo['borderingCountries']) == 0:
         bord += "None"
     hints.append(["Captial: " + countryInfo['capital'][0], bord])
@@ -152,13 +152,13 @@ def getHints(x):
     else:
         currencyStr = "Currency: "
     for i in countryInfo['currency']:
-        currencyStr += i + " "
+        currencyStr += i + "; "
     if len(countryInfo['languages']) > 1:
         langStr = "Languages: "
     else:
         langStr = "Language: "
     for i in countryInfo['languages']:
-        langStr += i + " "
+        langStr += i + "; "
     hints.append([currencyStr, langStr])
 
     flagIMG = f"<img src=\"https://flagsapi.com/{countryInfo['name'][1]}/flat/64.png\" alt=\"Flag\" width=\"500\" height=\"600\">"
@@ -168,7 +168,7 @@ def getHints(x):
 
     pprint.pp(hints)
 
-    return 0
+    return hints
 
 # x = randomCountry()
 # getCountryInfo(x)

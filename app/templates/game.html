@@ -48,8 +48,12 @@
       <!-- First column -->
       <div class="col-lg-6 vh-100">
           <ul>
-            <li>{{country}}</li>
-            <li></li>
+            {% for i in hintnum %}
+              {% for sub in hints[hintnum] %}
+                <li>{{sub}}</li>
+              {% endfor %}
+             <br>
+            {% endfor %}
           </ul>
       </div>
       <!-- Second column -->

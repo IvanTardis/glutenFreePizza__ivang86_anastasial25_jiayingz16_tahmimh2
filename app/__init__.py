@@ -128,37 +128,16 @@ def game():
 
     if country == "N/A":
         hints = getHints("")
-        # country
+        country = hints[6][1]
         newGame(username, country)
     else:
         hints = getHints(country)
-    names = ['weather']
-    hints = [" " + getWeather(info['LatLong'][0] + info['LatLong'][1])]
-    num = 0
-    while num < 14:
-        # lastnum = 0
-        # while lastnum == num:
-        #     lastnum = random.randint(0, 13)
-        nameHint, Hint = list(info.items())[num]
-        # lastnum = num
-        num+=1
-        names.append(nameHint)
-        hints.append(Hint)
-    print(names)
-    print(hints)
-    hints = ""
-    hinters = 0
-    while hinters < hintnum:
-        namehint = names[hinters]
-        print(hinters)
-        hint = hints[hinters]
-        hints += f"<li>This country's {namehint}  data is: {hint} </li>"
     newguess = request.form['guess']
     if newguess.lower() == country.lower():
         finishGame(username)
     else:
         newHint(username)
-    return render_template('game.html')
+    return render_template('game.html', hints, hintnum)
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():
