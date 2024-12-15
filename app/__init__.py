@@ -132,12 +132,19 @@ def game():
         newGame(username, country)
     else:
         hints = getHints(country)
-    newguess = request.form['guess']
-    if newguess.lower() == country.lower():
-        finishGame(username)
-    else:
-        newHint(username)
-    return render_template('game.html', hints, hintnum)
+    # print(newHint)
+    print(hints[6][1])
+    print("CORRECT ANSWER: " + country)
+    if request.method == 'POST':
+        newguess = request.form['guess']
+        print("USER ENTERED: " + newguess)
+        print("CORRECT ANSWER: " + country)
+        if newguess.lower() == country.lower():
+            finishGame(username)
+        else:
+            newHint(username)
+            hintnum = numHints(username)
+    return render_template('game.html', hints=hints[:hintnum])
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():

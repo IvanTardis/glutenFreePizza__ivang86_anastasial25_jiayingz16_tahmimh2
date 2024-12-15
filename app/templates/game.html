@@ -48,8 +48,8 @@
       <!-- First column -->
       <div class="col-lg-6 vh-100">
           <ul>
-            {% for i in hintnum %}
-              {% for sub in hints[hintnum] %}
+            {% for hint in hints %}
+              {% for sub in hint %}
                 <li>{{sub}}</li>
               {% endfor %}
              <br>
@@ -58,7 +58,7 @@
       </div>
       <!-- Second column -->
       <div class="col-lg-6 vh-100">
-        <form action="/submit" method="POST" class="mt-3 p-4 border rounded bg-light shadow">
+        <form action="/game" method="POST" class="mt-3 p-4 border rounded bg-light shadow">
           <input type="text" class="form-control" id="guess" name="guess" placeholder="Enter your guess" required>
           <button type="submit" class="btn mt-1 btn-primary btn-block">Submit</button>
         </form>
