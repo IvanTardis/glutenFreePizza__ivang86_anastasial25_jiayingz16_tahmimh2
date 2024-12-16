@@ -156,11 +156,11 @@ def game():
                 # session.pop('guess', None)
             else:
                 guess_result = "incorrect"
-                if hintnum < 6:
-                    newHint(username)
-                    hintnum = numHints(username)
-                else:
-                    hintnum += 1
+                # if hintnum < 6:
+                newHint(username)
+                hintnum = numHints(username)
+                # else:
+                #     hintnum += 1
 
     if hintnum >= 7:
         flash("You failed to guess the country correctly.", 'danger')
@@ -180,7 +180,7 @@ def game():
 def restart():
     if 'username' in session:
         username = session['username']
-        finishGame(username)
+        restartGame(username)
         flash("Game restarted!", 'info')
         return redirect('/game')
     else:
