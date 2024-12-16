@@ -166,3 +166,4 @@ michelleZ -- 2024-12-17 10:30
 
 anastasiaL -- 2024-12-16 10:38
 * sorted country list (__init__.py)
+* wrote restart method (guess_db.py)
