@@ -162,6 +162,7 @@ anastasiaL -- 2024-12-16 01:13
 michelleZ -- 2024-12-17 10:30
 * added game to navbar
 * styled hint display
+* added background image to all pages
 
 anastasiaL -- 2024-12-16 10:38
 * sorted country list (__init__.py)
