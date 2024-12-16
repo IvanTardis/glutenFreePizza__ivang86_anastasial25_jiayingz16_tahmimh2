@@ -14,7 +14,7 @@ from user_db import *
 
 
 # Load in a Dict of Countries
-restCountriesLink = "https://restcountries.com/v3.1/independent?fields=name,cca2"
+restCountriesLink = "https://restcountries.com/v3.1/independent?fields=name,cca2,cca3"
 restCountriesURL = urllib.request.urlopen(restCountriesLink)
 readCountries = restCountriesURL.read()
 countryDict = json.loads(readCountries)
@@ -23,10 +23,24 @@ cleanerDict = {}
 i = 0
 for country in countryDict:
     # print(country)
-    cleanerDict[i] = country['name']['common'], country['cca2']
+    cleanerDict[i] = country['name']['common'], country['cca2'], country['cca3']
     i+=1
 # pprint.pp(cleanerDict)
 
+
+def nameLst():
+    rcLink = "https://restcountries.com/v3.1/independent?fields=name,cca2,cca3"
+    rcURL = urllib.request.urlopen(restCountriesLink)
+    readRC = restCountriesURL.read()
+    loader = json.loads(readCountries)
+
+    names = []
+    i = 0
+    for country in loader:
+        # print(country)
+        names.append(country['name']['common'])
+        i+=1
+    return names
 
 # Returns the 2 letter code of a random country from our dict
 def randomCountry():
@@ -41,7 +55,7 @@ def getCountryInfo(x):
     # There was an issue with Python crashing because of the symbol of the currency breaking it, i suspect this is not unique to Turkey, so maybe we will get to that
     # a = f"https://restcountries.com/v3.1/alpha/TR"
 
-    print(a)
+    # print(a)
     b = urllib.request.urlopen(a)
     c = b.read()
     d = json.loads(c)
@@ -73,7 +87,6 @@ def getCountryInfo(x):
 
     info = {
         'name': [d[0]['name']['common'], x],
-        'unMember': d[0]['unMember'],
         'currency': currencyLst,
         'capital': d[0]['capital'],
         'region': d[0]['region'],
@@ -110,18 +123,82 @@ def getWeather(lat, long):
             # pprint.pp(weatherDict)
             return weatherDict
 
+def getCountryFullName(cca3):
+    for i in cleanerDict:
+        if cca3 in cleanerDict[i]:
+            return cleanerDict[i][0]
+    return ""
+
+def getCountryCCA2(full):
+    for i in cleanerDict:
+        if full in cleanerDict[i]:
+            return cleanerDict[i][1]
+    return ""
+
 def getHints(x):
+    # print(x)
     if x == "":
         x = randomCountry()
+    x = getCountryCCA2(x)
     countryInfo = getCountryInfo(x)
-    pprint.pp(countryInfo)
+    # pprint.pp(countryInfo)
     weatherInfo = getWeather(countryInfo['LatLong'][0],countryInfo['LatLong'][1])
-    pprint.pp(weatherInfo)
+    # pprint.pp(weatherInfo)
+
+    # print(weatherInfo['main']['temp'])
 
     hints = []
+    hints.append(["Temperature: " + str(weatherInfo['main']['temp']) + "°C" , "Feels Like: " + str(weatherInfo['main']['feels_like']) + "°C" , "Weather Description: " + weatherInfo['weather'][0]['main'] + "; " + weatherInfo['weather'][0]['description']])
 
-    return 0
+    continents = countryInfo['continents']
+    x = len(continents)
+    contStr = "Continent(s): "
+    hint2 = []
+    for i in continents:
+        contStr += i + "; "
+    pop = '{:,}'.format(countryInfo['population'])
+    area = '{:,}'.format(countryInfo['area'])
+    # print("POP: " +)
+    hints.append([contStr, "Area: " + area + " km²", "Population: " + pop])
+
+    coaIMG = f"<img src=\"{countryInfo['coatOfArms']}\" alt=\"Coat of Arms\" width=\"100\" height=\"150\">"
+    hints.append(["Subregion: " + countryInfo['subregion'], coaIMG, "Land Locked?: " + str(countryInfo['landlocked'])])
+
+    bord = "Bordering Countries: "
+    for i in countryInfo['borderingCountries']:
+        # print(i)
+        # print(getCountryFullName(i))
+        x = getCountryFullName(i)
+        bord += x
+        if len(x) > 0:
+            bord += "; "
+    if len(countryInfo['borderingCountries']) == 0:
+        bord += "None"
+    hints.append(["Captial: " + countryInfo['capital'][0], bord])
+
+    if len(countryInfo['currency']) > 1:
+        currencyStr = "Currencies: "
+    else:
+        currencyStr = "Currency: "
+    for i in countryInfo['currency']:
+        currencyStr += i + "; "
+    if len(countryInfo['languages']) > 1:
+        langStr = "Languages: "
+    else:
+        langStr = "Language: "
+    for i in countryInfo['languages']:
+        langStr += i + "; "
+    hints.append([currencyStr, langStr])
+
+    flagIMG = f"<img src=\"https://flagsapi.com/{countryInfo['name'][1]}/flat/64.png\" alt=\"Flag\" width=\"100\" height=\"150\">"
+    hints.append([flagIMG])
+
+    hints.append(["The country was: ", countryInfo['name'][0]])
+
+    # pprint.pp(hints)
+
+    return hints
 
 # x = randomCountry()
 # getCountryInfo(x)
-getHints("")
+# getHints("")

@@ -75,10 +75,12 @@ def auth_login():
             flash(message, 'danger')
             return redirect('/login')
 
-        session['username'] = username
-        flash("Login successful", "success")
-        return redirect('/')
-    return redirect('/login')
+        else:
+            session['username'] = username
+            addUserG(session['username'])
+            return redirect('/')
+
+    return redirect('/')
 
 # USER REGISTRATIONS
 @app.route('/register', methods=['GET', 'POST'])
@@ -107,34 +109,83 @@ def auth_reg():
 # USER LOGOUTS
 @app.route('/logout', methods=["GET", "POST"])
 def logout():
-    session.pop('username', None)
-    session.pop('password', None)
-    flash("You have been logged out.", "success")
+    session.clear()
+    flash("Logged out successfully", 'info')
     return redirect("/login")
 
 @app.route('/description', methods=["GET"])
 def description():
     return render_template('description.html')
 
-@app.route('/game', methods=["GET"])
+@app.route('/game', methods=["GET", "POST"])
 def game():
-    country = randomCountry()
-    info = getCountryInfo(country)
-    names = []
-    hints = []
-    num = 0
-    while num < 14:
-        # lastnum = 0
-        # while lastnum == num:
-        #     lastnum = random.randint(0, 13)
-        nameHint, Hint = list(info.items())[num]
-        # lastnum = num
-        num+=1
-        names.append(nameHint)
-        hints.append(Hint)
-    pprint(names)
-    pprint(hints)
-    return render_template('game.html')
+    if 'username' in session:
+        username = session['username']
+    else:
+        return redirect('/login')
+    inProgress = True
+    country = getcurrCountry(username)
+    hintnum = numHints(username)
+    # print("HINTS: " + str(hintnum))
+    if country == "N/A":
+        hints = getHints("")
+        country = hints[6][1]
+        newGame(username, country)
+    else:
+        hints = getHints(country)
+
+    guess_result = None
+    # print(newHint)
+    # print(hints[6][1])
+    # print("CORRECT ANSWER: " + country)
+    if request.method == 'POST':
+        newguess = request.form['guess']
+        # print("USER ENTERED: " + newguess)
+        # print("CORRECT ANSWER: " + country)
+
+        if newguess != "1p2490ufahsbfgoagh0qr8201":
+            if newguess.lower() == country.lower():
+                # print("USER WON")
+                if hintnum > 1:
+                    winMSG = "Congratulations! You guessed " + country + " correctly after " + str(hintnum) + " hints."
+                else:
+                    winMSG = "Congratulations! You guessed " + country + " correctly after " + str(hintnum) + " hint."
+                flash(winMSG, 'success')
+                finishGame(username)
+                inProgress = False
+                # session.pop('guess', None)
+            else:
+                guess_result = "incorrect"
+                if hintnum < 6:
+                    newHint(username)
+                    hintnum = numHints(username)
+                else:
+                    hintnum += 1
+
+    if hintnum >= 7:
+        flash("You failed to guess the country correctly.", 'danger')
+        finishGame(username)
+        inProgress = False
+
+    sender = hints[:hintnum]
+    sender.reverse()
+
+    countryLst = nameLst()
+    if(inProgress):
+        return render_template('game.html', hints=sender, guess_result=guess_result, countries=countryLst)
+    else:
+        return render_template('gameDone.html', hints=sender)
+
+@app.route('/restart', methods=["POST"])
+def restart():
+    if 'username' in session:
+        username = session['username']
+        finishGame(username)
+        flash("Game restarted!", 'info')
+        return redirect('/game')
+    else:
+        flash("You must log in to restart the game.", 'danger')
+        return redirect('/login')
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():
@@ -147,8 +198,6 @@ def profile():
         print(profileArr(username))
         return render_template('profile.html', username = username)
     return render_template('profile.html', username = "login to see profile") #temporary
-
-
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
