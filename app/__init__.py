@@ -189,15 +189,19 @@ def restart():
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():
-    return render_template('leaderboard.html')
+    print(top10())
+    num = []
+    for i in range (len(top10())):
+        num.append(i)
+    return render_template('leaderboard.html', arr = top10(), num = num)
 
 @app.route('/profile', methods=["GET"])
 def profile():
     if 'username' in session:
         username = session['username']
         print(profileArr(username))
-        return render_template('profile.html', username = username)
-    return render_template('profile.html', username = "login to see profile") #temporary
+        return render_template('profile.html', arr = profileArr(username))
+    return render_template('profile.html', message = "Log in to see profile") #temporary
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

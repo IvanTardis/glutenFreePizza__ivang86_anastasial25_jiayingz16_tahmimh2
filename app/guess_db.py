@@ -26,10 +26,6 @@ def addUserG(username):
 def newGame(username, c_curr):
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
-    # c_num++
-    c.execute("SELECT c_num FROM guesses WHERE username = ?", (username,))
-    old_c_num = c.fetchone()[0]
-    c.execute("UPDATE guesses SET c_num = ? WHERE username = ?", (old_c_num+1, username))
     # hint_num = 1
     c.execute("UPDATE guesses SET hint_num = ? WHERE username = ?", (1, username))
     # c_curr = new current country
@@ -40,6 +36,10 @@ def finishGame(username):
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
     newHint(username)
+    # c_num++
+    c.execute("SELECT c_num FROM guesses WHERE username = ?", (username,))
+    old_c_num = c.fetchone()[0]
+    c.execute("UPDATE guesses SET c_num = ? WHERE username = ?", (old_c_num+1, username))
     # update g_avg
     c.execute("SELECT g_total FROM guesses WHERE username = ?", (username,))
     g_total = c.fetchone()[0]
@@ -67,15 +67,14 @@ def newHint(username):
 def profileArr(username):
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
-    c.execute("SELECT * FROM guesses")
-              # WHERE username = ?", (username,))
-    arr = c.fetchall()
+    c.execute("SELECT * FROM guesses WHERE username = ?", (username,))
+    arr = c.fetchone()
     return arr
 
-def leaderboard():
+def top10():
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
-    c.execute("SELECT g_avg FROM guesses")
+    c.execute("SELECT g_avg, username FROM guesses WHERE g_avg > 0")
     arr = c.fetchall()
     top10 = sorted(arr)[:10]
     return top10

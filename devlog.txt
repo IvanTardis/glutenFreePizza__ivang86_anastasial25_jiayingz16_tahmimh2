@@ -149,3 +149,8 @@ ivanG -- 2024-12-15 17:30
 * this involved additional HTML and python code in countries
 * also added commas to pop and area stats
 
+anastasiaL -- 2024-12-16 01:13
+* added footer on home page (home.html)
+* implemented simple profile page (profile.html)
+* fixed profileArr and top10 methods (guess_db.py)
+* filled in leaderboard page (leaderboard.html, __init__.py)
