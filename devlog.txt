@@ -158,3 +158,6 @@ anastasiaL -- 2024-12-16 01:13
 * implemented simple profile page (profile.html)
 * fixed profileArr and top10 methods (guess_db.py)
 * filled in leaderboard page (leaderboard.html, __init__.py)
+
+anastasiaL -- 2024-12-16 10:38
+* sorted country list (__init__.py)
