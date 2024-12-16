@@ -180,7 +180,7 @@ def game():
 def restart():
     if 'username' in session:
         username = session['username']
-        finishGame(username)
+        restartGame(username)
         flash("Game restarted!", 'info')
         return redirect('/game')
     else:

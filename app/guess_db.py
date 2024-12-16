@@ -64,7 +64,7 @@ def newHint(username):
     c.execute("UPDATE guesses SET hint_num = ? WHERE username = ?", (old_hint_num+1, username))
     guesses.commit()
 
-def restart(username):
+def restartGame(username):
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
     # g_total+=7
@@ -76,7 +76,7 @@ def restart(username):
     old_c_num = c.fetchone()[0]
     c.execute("UPDATE guesses SET c_num = ? WHERE username = ?", (old_c_num+1, username))
     guesses.commit()
-    
+
 
 def profileArr(username):
     guesses = sqlite3.connect(GUESS_FILE)
