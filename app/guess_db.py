@@ -75,6 +75,15 @@ def restartGame(username):
     c.execute("SELECT c_num FROM guesses WHERE username = ?", (username,))
     old_c_num = c.fetchone()[0]
     c.execute("UPDATE guesses SET c_num = ? WHERE username = ?", (old_c_num+1, username))
+    # update g_avg
+    c.execute("SELECT g_total FROM guesses WHERE username = ?", (username,))
+    g_total = c.fetchone()[0]
+    c.execute("SELECT c_num FROM guesses WHERE username = ?", (username,))
+    c_num = c.fetchone()[0]
+    new_g_avg = g_total/c_num
+    c.execute("UPDATE guesses SET g_avg = ? WHERE username = ?", (new_g_avg, username))
+    c.execute("UPDATE guesses SET c_curr = ? WHERE username = ?", ("N/A", username))
+    c.execute("UPDATE guesses SET hint_num = ? WHERE username = ?", (1, username))
     guesses.commit()
 
 
