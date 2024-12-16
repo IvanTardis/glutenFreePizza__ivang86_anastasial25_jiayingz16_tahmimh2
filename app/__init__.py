@@ -170,7 +170,7 @@ def game():
     sender = hints[:hintnum]
     sender.reverse()
 
-    countryLst = nameLst()
+    countryLst = sorted(nameLst())
     if(inProgress):
         return render_template('game.html', hints=sender, guess_result=guess_result, countries=countryLst)
     else:
