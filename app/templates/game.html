@@ -73,32 +73,23 @@
       <!-- First column -->
       <div class="col-lg-6 vh-100">
           <ul>
-<<<<<<< HEAD
-            {{country}}
-            <li></li>
-=======
             {% for hint in hints %}
               {% for sub in hint %}
                 <li> {{sub|safe}} </li>
               {% endfor %}
              <br>
             {% endfor %}
->>>>>>> d30eb8dcff45cb05518bed31142f95762555b133
           </ul>
       </div>
       <!-- Second column -->
       <div class="col-lg-6 vh-100">
         <form action="/game" method="POST" class="mt-3 p-4 border rounded bg-light shadow">
-<<<<<<< HEAD
-          <input type="text" class="form-control" id="guess" name="guess" placeholder="Enter your guess" required>
-=======
           <input type="text" class="form-control" id="guess" name="guess" list="countries-list" placeholder="Enter your guess" required>
           <datalist id="countries-list">
             {% for country in countries %}
               <option>{{country|safe}}</option>
             {% endfor %}
           </datalist>
->>>>>>> d30eb8dcff45cb05518bed31142f95762555b133
           <button type="submit" class="btn mt-1 btn-primary btn-block">Submit</button>
         </form>
         <form action="/restart" method="POST" class="mt-3">
