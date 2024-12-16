@@ -78,7 +78,7 @@ def auth_login():
         session['username'] = username
         flash("Login successful", "success")
         return redirect('/')
-    return redirect('/')
+    return redirect('/login')
 
 # USER REGISTRATIONS
 @app.route('/register', methods=['GET', 'POST'])
@@ -109,7 +109,7 @@ def auth_reg():
 def logout():
     session.pop('username', None)
     session.pop('password', None)
-    flash("You have been logged out.", "info")
+    flash("You have been logged out.", "success")
     return redirect("/login")
 
 @app.route('/description', methods=["GET"])
