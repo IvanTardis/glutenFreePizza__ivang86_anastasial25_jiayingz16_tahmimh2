@@ -144,7 +144,7 @@ ivanG -- 2024-12-15 14:30
 * tested out and got image hints working
 
 michelleZ -- 2024-12-15 17:00
-* styled game page & hints display
+* styled game page
 * added restart game button
 * modified __init__.py to incorporate above changes
 
@@ -158,6 +158,10 @@ anastasiaL -- 2024-12-16 01:13
 * implemented simple profile page (profile.html)
 * fixed profileArr and top10 methods (guess_db.py)
 * filled in leaderboard page (leaderboard.html, __init__.py)
+
+michelleZ -- 2024-12-17 10:30
+* added game to navbar
+* styled hint display
 
 anastasiaL -- 2024-12-16 10:38
 * sorted country list (__init__.py)
