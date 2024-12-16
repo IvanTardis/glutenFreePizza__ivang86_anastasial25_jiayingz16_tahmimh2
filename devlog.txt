@@ -128,3 +128,33 @@ michelleZ -- 2024-12-11 11:00
 tahmimH -- 2024-12-13 10:45
 * still trying to fix logic with game page
 * Nothing is broken right now, but need to insert logic for the game
+
+michelleZ -- 2024-12-12 11:00
+* reconciled flash messages errors
+* tried connecting frontend to backend
+
+ivanG -- 2024-12-14 21:08
+* formatted user hints into a list to be used on game page
+* mildly started working on game page display, mostly working on the code, not working yet though
+* planned out on paper what my logic needs to look like
+
+ivanG -- 2024-12-15 14:30
+* got the hints on the display page working correctly
+* put in logic for different cases (game won, lost, starting new game)
+* tested out and got image hints working
+
+michelleZ -- 2024-12-15 17:00
+* styled game page & hints display
+* added restart game button
+* modified __init__.py to incorporate above changes
+
+ivanG -- 2024-12-15 17:30
+* got a list of potential countries to be display for user to choose from
+* this involved additional HTML and python code in countries
+* also added commas to pop and area stats
+
+anastasiaL -- 2024-12-16 01:13
+* added footer on home page (home.html)
+* implemented simple profile page (profile.html)
+* fixed profileArr and top10 methods (guess_db.py)
+* filled in leaderboard page (leaderboard.html, __init__.py)

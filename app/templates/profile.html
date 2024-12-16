@@ -37,8 +37,23 @@
     </div>
   </div>
 </nav>
+{% if message %}
 <div>
-    <h1> {{username}} </h1>
+  <ul class="list-group">
+    <li class="list-group-item"><h2>{{message}}</h2></li>
+  </ul>
 </div>
+{% endif %}
+
+{% if arr %}
+<div>
+  <ul class="list-group">
+    <li class="list-group-item"><h2>Profile for user {{arr[0]}}</h2></li>
+    <li class="list-group-item">Total number of guesses: {{arr[1]}}</li>
+    <li class="list-group-item">Number of countries completed: {{arr[2]}}</li>
+    <li class="list-group-item">Average number of guesses used: {{arr[3]}}</li>
+  </ul>
+</div>
+{% endif %}
 </body>
 </html>

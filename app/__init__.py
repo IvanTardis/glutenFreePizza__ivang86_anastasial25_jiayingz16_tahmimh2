@@ -79,7 +79,7 @@ def auth_login():
             session['username'] = username
             addUserG(session['username'])
             return redirect('/')
-        
+
     return redirect('/')
 
 # USER REGISTRATIONS
@@ -123,64 +123,85 @@ def game():
         username = session['username']
     else:
         return redirect('/login')
+    inProgress = True
+    country = getcurrCountry(username)
     hintnum = numHints(username)
-    #sees if there are any hints (if there is currently a country going on)
-    if (hintnum == 0):
-        country = randomCountry()
-        pprint('broken')
+    # print("HINTS: " + str(hintnum))
+    if country == "N/A":
+        hints = getHints("")
+        country = hints[6][1]
         newGame(username, country)
     else:
-        country = getcurrCountry(username)
-    #if there is a game going on already, gets from current game, if not, upper code works
-    country = randomCountry()
-    print(country)
-    newGame(username, country)
-    hintnum = numHints(username)
-    info = getCountryInfo(country)
-    names = []
-    hints = []
-    # names = ['weather']
-    # hints = [" " + getWeather(info['LatLong'][0] + info['LatLong'][1])]
-    num = 0
-    while num < 14:
-        # lastnum = 0
-        # while lastnum == num:
-        #     lastnum = random.randint(0, 13)
-        nameHint, Hint = list(info.items())[num]
-        # lastnum = num
-        num+=1
-        names.append(nameHint)
-        hints.append(Hint)
-    hintse = ""
-    hinters = 0
-    while hinters < hintnum:
-        print (names[hinters])
-        namehint = names[hinters]
-        print(hinters)
-        hint = hints[hinters]
-        hintse += f"<li>This country's {namehint}  data is: {hint} </li>/"
-        hinters +=1
-    if request.method == "POST":
+        hints = getHints(country)
+
+    guess_result = None
+    # print(newHint)
+    # print(hints[6][1])
+    # print("CORRECT ANSWER: " + country)
+    if request.method == 'POST':
         newguess = request.form['guess']
-        if newguess.lower() == country.lower():
-            finishGame(username)
-            return redirect('/game')
-        else:
-            newHint(username)
-            return redirect('/game')
-    return render_template('game.html', country = hintse)
+        # print("USER ENTERED: " + newguess)
+        # print("CORRECT ANSWER: " + country)
+
+        if newguess != "1p2490ufahsbfgoagh0qr8201":
+            if newguess.lower() == country.lower():
+                # print("USER WON")
+                if hintnum > 1:
+                    winMSG = "Congratulations! You guessed " + country + " correctly after " + str(hintnum) + " hints."
+                else:
+                    winMSG = "Congratulations! You guessed " + country + " correctly after " + str(hintnum) + " hint."
+                flash(winMSG, 'success')
+                finishGame(username)
+                inProgress = False
+                # session.pop('guess', None)
+            else:
+                guess_result = "incorrect"
+                if hintnum < 6:
+                    newHint(username)
+                    hintnum = numHints(username)
+                else:
+                    hintnum += 1
+
+    if hintnum >= 7:
+        flash("You failed to guess the country correctly.", 'danger')
+        finishGame(username)
+        inProgress = False
+
+    sender = hints[:hintnum]
+    sender.reverse()
+
+    countryLst = nameLst()
+    if(inProgress):
+        return render_template('game.html', hints=sender, guess_result=guess_result, countries=countryLst)
+    else:
+        return render_template('gameDone.html', hints=sender)
+
+@app.route('/restart', methods=["POST"])
+def restart():
+    if 'username' in session:
+        username = session['username']
+        finishGame(username)
+        flash("Game restarted!", 'info')
+        return redirect('/game')
+    else:
+        flash("You must log in to restart the game.", 'danger')
+        return redirect('/login')
 
 @app.route('/leaderboard', methods=["GET"])
 def leaderboard():
-    return render_template('leaderboard.html')
+    print(top10())
+    num = []
+    for i in range (len(top10())):
+        num.append(i)
+    return render_template('leaderboard.html', arr = top10(), num = num)
 
 @app.route('/profile', methods=["GET"])
 def profile():
     if 'username' in session:
         username = session['username']
         print(profileArr(username))
-        return render_template('profile.html', username = username)
-    return render_template('profile.html', username = "login to see profile") #temporary
+        return render_template('profile.html', arr = profileArr(username))
+    return render_template('profile.html', message = "Log in to see profile") #temporary
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
