@@ -164,7 +164,7 @@ def game():
 
     if hintnum >= 7:
         flash("You failed to guess the country correctly.", 'danger')
-        finishGame(username)
+        restartGame(username)
         inProgress = False
 
     sender = hints[:hintnum]
@@ -195,13 +195,19 @@ def leaderboard():
         num.append(i)
     return render_template('leaderboard.html', arr = top10(), num = num)
 
-@app.route('/profile', methods=["GET"])
+@app.route('/profile', methods=["GET", "POST"])
 def profile():
     if 'username' in session:
         username = session['username']
         print(profileArr(username))
+        if request.method == 'POST':
+            # print("REQUEST.FORM")
+            # print(request.form)
+            units = request.form['units']
+            updateUnits(username, units)
+        # print(getUnits(username))
         return render_template('profile.html', arr = profileArr(username))
-    return render_template('profile.html', message = "Log in to see profile") #temporary
+    return render_template('profile.html', message = "Log in to see profile")
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

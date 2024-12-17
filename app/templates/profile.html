@@ -46,11 +46,14 @@
   </div>
 </nav>
 {% if message %}
-<div>
+<div class="container-fluid">
+  <h2>{{message}}</h2>
+</div>
+<!-- <div>
   <ul class="list-group">
     <li class="list-group-item"><h2>{{message}}</h2></li>
   </ul>
-</div>
+</div> -->
 {% endif %}
 
 {% if arr %}
@@ -60,24 +63,47 @@
     <li class="list-group-item">Total number of guesses: {{arr[1]}}</li>
     <li class="list-group-item">Number of countries completed: {{arr[2]}}</li>
     <li class="list-group-item">Average number of guesses used: {{arr[3]}}</li>
+    <li class="list-group-item">
+      <h3>Settings</h3>
+      {% if arr[6] == "metric" %}
+      <form action="/profile" method="POST">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="units" id="unitsM" value="metric" checked>
+          <label class="form-check-label" for="unitsM">
+            Metric units
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="units" id="unitsI" value="imperial">
+          <label class="form-check-label" for="unitsI">
+            Imperial units
+          </label>
+        </div>
+        <button type="submit" class="btn mt-1 btn-primary btn-block">Save</button>
+      </form>
+      {%endif%}
+      {% if arr[6] == "imperial" %}
+      <form action="/profile" method="POST">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="units" id="unitsM" value="metric">
+          <label class="form-check-label" for="unitsM">
+            Metric units
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="units" id="unitsI" value="imperial" checked>
+          <label class="form-check-label" for="unitsI">
+            Imperial units
+          </label>
+        </div>
+        <button type="submit" class="btn mt-1 btn-primary btn-block">Save</button>
+      </form>
+      {%endif%}
+    </li>
   </ul>
 </div>
+
 {% endif %}
-
-<h3>Settings</h3>
-
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-  <label class="form-check-label" for="exampleRadios1">
-    Default radio
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-  <label class="form-check-label" for="exampleRadios2">
-    Second default radio
-  </label>
-</div>
 
 </body>
 </html>

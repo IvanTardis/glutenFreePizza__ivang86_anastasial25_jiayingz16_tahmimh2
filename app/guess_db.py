@@ -10,7 +10,7 @@ GUESS_FILE = "guesses.db"
 def createGuesses():
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
-    command = "CREATE TABLE IF NOT EXISTS guesses (username TEXT, g_total INTEGER, c_num INTEGER, g_avg DECIMAL, c_curr TEXT, hint_num INTEGER)"
+    command = "CREATE TABLE IF NOT EXISTS guesses (username TEXT, g_total INTEGER, c_num INTEGER, g_avg DECIMAL, c_curr TEXT, hint_num INTEGER, unit TEXT)"
     c.execute(command)
     guesses.commit()
 
@@ -18,7 +18,7 @@ def addUserG(username):
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
     if (c.execute("SELECT 1 FROM guesses WHERE username=?", (username,))).fetchone() == None:
-        c.execute("INSERT INTO guesses (username, g_total, c_num, g_avg, c_curr, hint_num) VALUES (?, ?, ?, ?, ?, ?)", (username, 0, 0, 0, "N/A", 1))
+        c.execute("INSERT INTO guesses (username, g_total, c_num, g_avg, c_curr, hint_num, unit) VALUES (?, ?, ?, ?, ?, ?, ?)", (username, 0, 0, 0, "N/A", 1, "metric"))
         guesses.commit()
         return
     return "Username taken"
@@ -67,10 +67,13 @@ def newHint(username):
 def restartGame(username):
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
+    # get hint_num
+    c.execute("SELECT hint_num FROM guesses WHERE username = ?", (username,))
+    hint_num = c.fetchone()[0]
     # g_total+=7
     c.execute("SELECT g_total FROM guesses WHERE username = ?", (username,))
     old_g_total = c.fetchone()[0]
-    c.execute("UPDATE guesses SET g_total = ? WHERE username = ?", (old_g_total+7, username))
+    c.execute("UPDATE guesses SET g_total = ? WHERE username = ?", (old_g_total+8-hint_num, username))
     # c_num++
     c.execute("SELECT c_num FROM guesses WHERE username = ?", (username,))
     old_c_num = c.fetchone()[0]
@@ -101,6 +104,19 @@ def top10():
     arr = c.fetchall()
     top10 = sorted(arr)[:10]
     return top10
+
+def updateUnits(username, units):
+    guesses = sqlite3.connect(GUESS_FILE)
+    c = guesses.cursor()
+    c.execute("UPDATE guesses SET unit = ? WHERE username = ?", (units, username))
+    guesses.commit()
+
+def getUnits(username):
+    guesses = sqlite3.connect(GUESS_FILE)
+    c = guesses.cursor()
+    c.execute("SELECT unit FROM guesses WHERE username = ?", (username,) )
+    curr_units = c.fetchone()
+    return curr_units[0]
 
 def deleteGuesses():
     guesses = sqlite3.connect(GUESS_FILE)
