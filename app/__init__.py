@@ -128,11 +128,11 @@ def game():
     hintnum = numHints(username)
     # print("HINTS: " + str(hintnum))
     if country == "N/A":
-        hints = getHints("")
+        hints = getHints("", getUnits(username))
         country = hints[6][1]
         newGame(username, country)
     else:
-        hints = getHints(country)
+        hints = getHints(country, getUnits(username))
 
     guess_result = None
     # print(newHint)

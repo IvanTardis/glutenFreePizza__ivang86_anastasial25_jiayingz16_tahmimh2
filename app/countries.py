@@ -103,7 +103,7 @@ def getCountryInfo(x):
     # pprint.pp(info)
     return info
 
-def getWeather(lat, long):
+def getWeather(lat, long, units):
     try:
         file = open("./keys/key_openWeatherMap.txt")
     except:
@@ -111,7 +111,10 @@ def getWeather(lat, long):
     else:
         weatherKey = file.readline()
         weatherKey = weatherKey[:-1]
-        restWeatherLink = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={weatherKey}&units=metric"
+        # if(units == 'metric'):
+        restWeatherLink = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={weatherKey}&units={units}"
+        # if units == 'imperial':
+            # restWeatherLink = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={weatherKey}&units=imperial"
         # print(restWeatherLink)
         try:
             restWeatherURL = urllib.request.urlopen(restWeatherLink)
@@ -135,20 +138,23 @@ def getCountryCCA2(full):
             return cleanerDict[i][1]
     return ""
 
-def getHints(x):
+def getHints(x, units):
     # print(x)
     if x == "":
         x = randomCountry()
     x = getCountryCCA2(x)
     countryInfo = getCountryInfo(x)
     # pprint.pp(countryInfo)
-    weatherInfo = getWeather(countryInfo['LatLong'][0],countryInfo['LatLong'][1])
+    weatherInfo = getWeather(countryInfo['LatLong'][0],countryInfo['LatLong'][1], units)
     # pprint.pp(weatherInfo)
 
     # print(weatherInfo['main']['temp'])
 
     hints = []
-    hints.append(["Temperature: " + str(weatherInfo['main']['temp']) + "°C" , "Feels Like: " + str(weatherInfo['main']['feels_like']) + "°C" , "Weather Description: " + weatherInfo['weather'][0]['main'] + "; " + weatherInfo['weather'][0]['description']])
+    if units == 'metric':
+        hints.append(["Temperature: " + str(weatherInfo['main']['temp']) + "°C" , "Feels Like: " + str(weatherInfo['main']['feels_like']) + "°C" , "Weather Description: " + weatherInfo['weather'][0]['main'] + "; " + weatherInfo['weather'][0]['description']])
+    if units == 'imperial':
+        hints.append(["Temperature: " + str(weatherInfo['main']['temp']) + "°F" , "Feels Like: " + str(weatherInfo['main']['feels_like']) + "°F" , "Weather Description: " + weatherInfo['weather'][0]['main'] + "; " + weatherInfo['weather'][0]['description']])
 
     continents = countryInfo['continents']
     x = len(continents)
@@ -157,9 +163,17 @@ def getHints(x):
     for i in continents:
         contStr += i + "; "
     pop = '{:,}'.format(countryInfo['population'])
-    area = '{:,}'.format(countryInfo['area'])
+    area = countryInfo['area']
     # print("POP: " +)
-    hints.append([contStr, "Area: " + area + " km²", "Population: " + pop])
+    if units == 'metric':
+        area = '{:,}'.format(area)
+        hints.append([contStr, "Area: " + area + " km²", "Population: " + pop])
+    if units == 'imperial':
+        # area = float(area)
+        area *= 0.386102
+        area = round(area)
+        area = '{:,}'.format(area)
+        hints.append([contStr, "Area: " + area + " mi²", "Population: " + pop])
 
     coaIMG = f"<img src=\"{countryInfo['coatOfArms']}\" alt=\"Coat of Arms\" width=\"100\" height=\"150\">"
     hints.append(["Subregion: " + countryInfo['subregion'], coaIMG, "Land Locked?: " + str(countryInfo['landlocked'])])
