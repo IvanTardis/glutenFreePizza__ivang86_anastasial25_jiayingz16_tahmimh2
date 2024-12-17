@@ -176,3 +176,10 @@ anastasiaL -- 2024-12-16 22:55
 
 michelleZ -- 2024-12-16 22:00
 * fixed minor styling issues
+
+anastasiaL -- 2024-12-17 00:05
+* updated design doc:
+  * added profile page to component list, component map, site map
+  * included list of all hints given to user
+  * added leaderboard table
+  * added unit preference column to database organization
