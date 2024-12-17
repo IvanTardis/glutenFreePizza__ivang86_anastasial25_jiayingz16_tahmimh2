@@ -159,7 +159,7 @@ anastasiaL -- 2024-12-16 01:13
 * fixed profileArr and top10 methods (guess_db.py)
 * filled in leaderboard page (leaderboard.html, __init__.py)
 
-michelleZ -- 2024-12-17 10:30
+michelleZ -- 2024-12-16 10:30
 * added game to navbar
 * styled hint display
 * added background image to all pages
@@ -173,3 +173,6 @@ anastasiaL -- 2024-12-16 22:55
 * added units column in guesses table
 * wrote updateUnits and getUnits methods
 * added units form on profile page
+
+michelleZ -- 2024-12-16 22:00
+* fixed minor styling issues
