@@ -204,7 +204,7 @@ def getHints(x, units):
         langStr += i + "; "
     hints.append([currencyStr, langStr])
 
-    flagIMG = f"<img src=\"https://flagsapi.com/{countryInfo['name'][1]}/flat/64.png\" alt=\"Flag\" width=\"100\" height=\"150\">"
+    flagIMG = f"<img src=\"https://flagsapi.com/{countryInfo['name'][1]}/flat/64.png\" alt=\"Flag\" width=\"200\" height=\"200\">"
     hints.append([flagIMG])
 
     hints.append(["The country was: ", countryInfo['name'][0]])

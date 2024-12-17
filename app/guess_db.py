@@ -89,7 +89,6 @@ def restartGame(username):
     c.execute("UPDATE guesses SET hint_num = ? WHERE username = ?", (1, username))
     guesses.commit()
 
-
 def profileArr(username):
     guesses = sqlite3.connect(GUESS_FILE)
     c = guesses.cursor()
