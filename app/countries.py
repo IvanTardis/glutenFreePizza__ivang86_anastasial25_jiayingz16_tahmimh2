@@ -150,7 +150,7 @@ def getHints(x, units):
     x = len(continents)
     if x > 1:
         contStr = "Continents: "
-    else if x == 1:
+    if x == 1:
         contStr = "Continent: "
     for i in continents:
         contStr += i + "; "
