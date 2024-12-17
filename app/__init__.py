@@ -20,7 +20,7 @@ app = Flask(__name__)    #create Flask object
 app.secret_key = os.urandom(32)
 
 #getHints()
-createUsers() #creates Users database   
+createUsers() #creates Users database
 createGuesses() #creates Guesses database
 
 # Home Route
@@ -194,5 +194,5 @@ def profile():
 # RUN FLASK APP
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
-    app.debug = True
+    app.debug = False
     app.run()

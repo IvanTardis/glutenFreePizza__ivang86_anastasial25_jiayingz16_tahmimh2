@@ -7,6 +7,7 @@ import sqlite3
 
 USER_FILE = "users.db"
 
+# Creates user table
 def createUsers():
     users = sqlite3.connect(USER_FILE)
     c = users.cursor()
@@ -14,6 +15,7 @@ def createUsers():
     c.execute(command)
     users.commit()
 
+# Adds new user to table
 def addUser(username, password):
     users = sqlite3.connect(USER_FILE)
     c = users.cursor()
@@ -25,6 +27,7 @@ def addUser(username, password):
         return None  # Registration successful
     return "Username already exists"  # Registration failed
 
+# Checks if a login attempt was successful
 def checkLogin(username, password):
     users = sqlite3.connect(USER_FILE)
     c = users.cursor()
@@ -38,7 +41,8 @@ def checkLogin(username, password):
         return None  # Login successful
     return "Invalid login; please try again."  # Login failed
 
+# Deletes user table
 def deleteUsers():
-    db = sqlite3.connect(USER_FILE) 
+    db = sqlite3.connect(USER_FILE)
     c = db.cursor()
     c.execute("DROP table users")
